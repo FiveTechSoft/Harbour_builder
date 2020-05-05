@@ -1,0 +1,56 @@
+name: Harbour for Windows 32 using BCC
+
+on:
+  watch:
+   types: [started]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    if: github.actor == github.event.repository.owner.login
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Checkout harbour/core repo
+      uses: actions/checkout@v2
+      with:
+       repository: harbour/core
+       path: harbour
+
+    - name: Install dependencies
+      run: |
+         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/fivetech/harbour_builder_resources/downloads/bcc71.zip', 'C:\temp\bcc71.zip')
+         Expand-Archive -LiteralPath C:\temp\bcc71.zip -DestinationPath C:\bcc7 -Force
+         
+    - name: Compile Harbour
+      shell: cmd
+      run: |
+        cd harbour
+        set path=c:\bcc7\bin
+        set HB_BUILD_MODE=c
+        set HB_USER_PRGFLAGS=-l-
+        set HB_BUILD_CONTRIBS=
+        set HB_WITH_OPENSSL=C:\OpenSSL\include
+        set HB_WITH_CURL=C:\curl\include
+        set HB_COMPILER=bcc
+        win-make.exe
+        
+    - name: Upload bins to artifact
+      uses: actions/upload-artifact@v2
+      with:
+       name: harbour_win32_bcc
+       path: harbour/bin/win/bcc
+
+    - name: Upload libs to artifact
+      uses: actions/upload-artifact@v2
+      with:
+       name: harbour_win32_bcc
+       path: harbour/lib/win/msvc
+
+    - name: Upload includes to artifact
+      uses: actions/upload-artifact@v2
+      with:
+       name: harbour_win32_bcc
+       path: harbour/include
