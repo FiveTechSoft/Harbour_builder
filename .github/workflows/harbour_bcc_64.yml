@@ -3,14 +3,12 @@ name: Harbour for Windows 64 using BCC
 on:
   push:
     branches: [master]
-  watch:
-   types: [started]
 
 jobs:
   build:
     runs-on: windows-latest
     
-    if: github.actor == github.event.repository.owner.login
+   # if: github.actor == github.event.repository.owner.login
     
     steps:    
     - name: Checkout harbour/core repo
