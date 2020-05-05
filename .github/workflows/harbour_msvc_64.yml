@@ -30,7 +30,7 @@ jobs:
       shell: cmd
       run: |
         cd harbour
-        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86_64
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86_amd64
         set HB_BUILD_MODE=c
         set HB_USER_PRGFLAGS=-l-
         set HB_BUILD_CONTRIBS=
