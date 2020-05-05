@@ -35,6 +35,7 @@ jobs:
         set HB_WITH_OPENSSL=C:\OpenSSL\include
         set HB_WITH_CURL=C:\curl\include
         set HB_COMPILER=bcc
+        set HB_USER_RESFLAGS=-Ic:\bcc7\include\windows\sdk\
         win-make.exe
         
     - name: Upload bins to artifact
