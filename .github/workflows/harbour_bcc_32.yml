@@ -10,9 +10,7 @@ jobs:
     
     if: github.actor == github.event.repository.owner.login
     
-    steps:
-    - uses: actions/checkout@v2
-    
+    steps:    
     - name: Checkout harbour/core repo
       uses: actions/checkout@v2
       with:
@@ -38,8 +36,19 @@ jobs:
         set HB_USER_RESFLAGS=-Ic:\bcc7\include\windows\sdk\
         win-make.exe
         
+    - name: create output folders
+      shell: cmd
+      run: |
+        mkdir output
+        mkdir output\bin
+        copy harbour\bin\win\bcc\*.exe output\bin
+        mkdir output\lib
+        copy harbour\lib\win\*.lib output\lib
+        mkdir output\include 
+        copy harbour\include output\include
+        
     - name: Upload Harbour to artifact
       uses: actions/upload-artifact@v2
       with:
        name: harbour_win32_bcc
-       path: harbour
+       path: output
