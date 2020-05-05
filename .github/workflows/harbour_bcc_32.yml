@@ -38,20 +38,8 @@ jobs:
         set HB_USER_RESFLAGS=-Ic:\bcc7\include\windows\sdk\
         win-make.exe
         
-    - name: Upload bins to artifact
+    - name: Upload Harbour to artifact
       uses: actions/upload-artifact@v2
       with:
        name: harbour_win32_bcc
-       path: harbour/bin/win/bcc
-
-    - name: Upload libs to artifact
-      uses: actions/upload-artifact@v2
-      with:
-       name: harbour_win32_bcc
-       path: harbour/lib/win/msvc
-
-    - name: Upload includes to artifact
-      uses: actions/upload-artifact@v2
-      with:
-       name: harbour_win32_bcc
-       path: harbour/include
+       path: harbour
