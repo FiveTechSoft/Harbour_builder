@@ -21,8 +21,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/fivetech/harbour_builder_resources/downloads/bcc71.zip', 'C:\temp\bcc71.zip')
-         Expand-Archive -LiteralPath C:\temp\bcc71.zip -DestinationPath C:\bcc7 -Force
+         (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/blob/master/.github/temp/bcc70.zip', 'C:\temp\bcc70.zip')
+         Expand-Archive -LiteralPath C:\temp\bcc70.zip -DestinationPath C:\bcc7 -Force
          
     - name: Compile Harbour
       shell: cmd
