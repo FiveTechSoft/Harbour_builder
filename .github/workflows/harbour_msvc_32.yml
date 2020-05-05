@@ -1,4 +1,4 @@
-name: Harbour for Windows 32-bits using MSVC
+name: Harbour for Windows 32 using MSVC
 
 on:
   watch:
