@@ -43,7 +43,7 @@ jobs:
         mkdir output\bin
         copy harbour\bin\win\bcc\*.exe output\bin
         mkdir output\lib
-        copy harbour\lib\win\*.lib output\lib
+        copy harbour\lib\win\bcc\*.lib output\lib
         mkdir output\include 
         copy harbour\include output\include
         
