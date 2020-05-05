@@ -23,7 +23,7 @@ jobs:
          Expand-Archive -LiteralPath C:\temp\OpenSSL-Win32.zip -DestinationPath C:\OpenSSL -Force
          (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/curl-7.54.0-win32-mingw.zip', 'C:\temp\curl-7.54.0-win32-mingw.zip')
          Expand-Archive -LiteralPath C:\temp\curl-7.54.0-win32-mingw.zip -DestinationPath C:\curl -Force        
-         (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/raw/master/.github/temp/bcc7164.zip', 'C:\temp\bcc7164.zip')
+         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/bcc7164.zip', 'C:\temp\bcc7164.zip')
          Expand-Archive -LiteralPath C:\temp\bcc7164.zip -DestinationPath C:\bcc7 -Force
          (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk-x64.zip', 'C:\temp\acesdk-x64.zip')
          Expand-Archive -LiteralPath C:\temp\acesdk-x64.zip -DestinationPath C:\acesdk -Force
