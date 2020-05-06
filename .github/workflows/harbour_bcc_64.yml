@@ -25,7 +25,7 @@ jobs:
          Expand-Archive -LiteralPath C:\temp\curl-7.54.0-win32-mingw.zip -DestinationPath C:\curl -Force        
          (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/bcc7164.zip', 'C:\temp\bcc7164.zip')
          Expand-Archive -LiteralPath C:\temp\bcc7164.zip -DestinationPath C:\bcc7164 -Force
-         copy c:\bcc7164\LIB\c0x64.o c:\harbour
+         copy c:\bcc7164\LIB\c0x64.o c:\bcc7164\LIB\c0x64.obj
          (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk-x64.zip', 'C:\temp\acesdk-x64.zip')
          Expand-Archive -LiteralPath C:\temp\acesdk-x64.zip -DestinationPath C:\acesdk -Force
          
