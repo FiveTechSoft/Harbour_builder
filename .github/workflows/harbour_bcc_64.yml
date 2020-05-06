@@ -48,6 +48,7 @@ jobs:
         set HB_BUILD_DYN=no
         set HB_USER_RESFLAGS=-Ic:\bcc7164\include\windows\sdk\
         set HB_TRACE=yes
+        set HB_USER_LDFLAGS=-Lharbour\lib\win\bcc64
         win-make.exe
         
     - name: Create output folders
