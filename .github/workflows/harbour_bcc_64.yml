@@ -46,7 +46,8 @@ jobs:
         set HB_BUILD_CONTRIB_DYN=no
         set HB_BUILD_DYN=no
         set HB_USER_RESFLAGS=-Ic:\bcc7164\include\windows\sdk\
-        copy c:\bcc7164\LIB\c0x64.o harbour\C0x64.OBJ
+        set HB_TRACE=yes
+        copy c:\bcc7164\LIB\c0x64.o c:\bcc7164\LIB\C0X64.OBJ
         win-make.exe
         
     - name: Create output folders
