@@ -40,7 +40,7 @@ jobs:
         set HB_WITH_CURL=C:\curl\include
         set HB_WITH_ADS=C:\acesdk        
         set HB_COMPILER=bcc64
-        set HB_CFLAGS=TEST
+        set HB_USER_CFLAGS=-d -O2
         set HB_BUILD_CONTRIB_DYN=no
         set HB_BUILD_DYN=no
         set HB_USER_RESFLAGS=-Ic:\bcc7\include\windows\sdk\
