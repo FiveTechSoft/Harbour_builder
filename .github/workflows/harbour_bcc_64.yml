@@ -47,7 +47,7 @@ jobs:
         set HB_BUILD_DYN=no
         set HB_USER_RESFLAGS=-Ic:\bcc7164\include\windows\sdk\
         set HB_TRACE=yes
-        powershell (Get-Content -path harbour\config\win\bcc.mk) -replace 'c0x64.obj','c0x64.o' | Set-Content -path harbour\config\win\bcc.mk
+        (Get-Content -path harbour\config\win\bcc.mk) -replace 'c0x64.obj','c0x64.o' | Set-Content -path harbour\config\win\bcc.mk
         win-make.exe
         
     - name: Create output folders
