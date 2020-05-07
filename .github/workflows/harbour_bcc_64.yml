@@ -33,8 +33,8 @@ jobs:
          (Get-Content -path harbour\utils\hbmk2\hbmk2.prg) -replace 'c0x64.obj','C:\bcc7164\lib\c0x64.o' | Set-Content -path harbour\utils\hbmk2\hbmk2.prg
          (Get-Content -path harbour\utils\hbmk2\hbmk2.prg) -replace 'cw64mt.lib','cw64mt.a' | Set-Content -path harbour\utils\hbmk2\hbmk2.prg
          (Get-Content -path harbour\utils\hbmk2\hbmk2.prg) -replace 'import64.lib','import64.a' | Set-Content -path harbour\utils\hbmk2\hbmk2.prg
+         (Get-Content -path harbour\utils\hbmk2\hbmk2.prg) -replace '"uuid",','' | Set-Content -path harbour\utils\hbmk2\hbmk2.prg
          (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/blob/master/.github/temp/xmath.a?raw=true', 'C:\bcc7164\lib\xmath.a')
-         (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/blob/master/.github/temp/uuid.a?raw=true', 'C:\bcc7164\lib\psdk\uuid.a')
          
     - name: Compile Harbour
       shell: cmd
