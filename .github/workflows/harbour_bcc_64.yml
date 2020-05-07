@@ -28,6 +28,7 @@ jobs:
          (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk-x64.zip', 'C:\temp\acesdk-x64.zip')
          Expand-Archive -LiteralPath C:\temp\acesdk-x64.zip -DestinationPath C:\acesdk -Force
          (Get-Content -path harbour\config\win\bcc.mk) -replace 'c0x64.obj','C:\bcc7164\lib\c0x64.o' | Set-Content -path harbour\config\win\bcc.mk
+         (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/blob/master/.github/temp/xmath.a?raw=true', 'C:\bcc7164\lib\xmath.a')
          
     - name: Compile Harbour
       shell: cmd
@@ -49,6 +50,7 @@ jobs:
         set HB_USER_RESFLAGS=-Ic:\bcc7164\include\windows\sdk\
         set HB_TRACE=yes
         set HB_USER_LDFLAGS=-Lc:\bcc7164\LIB -Lharbour\lib\win\bcc64 
+        set HB_USER_LIBS=c:\bcc7164\lib\xmath.a
         win-make.exe
         
     - name: Create output folders
