@@ -33,12 +33,12 @@ jobs:
     - name: Create output folders
       run: |
         mkdir output
-        mkdir output\bin
-        copy harbour\bin\darwin\clang\* output\bin
-        mkdir output\lib
-        copy harbour\lib\win\bcc64\*.a output\lib
-        mkdir output\include 
-        copy harbour\include output\include
+        mkdir output/bin
+        copy harbour/bin/darwin/clang/* output/bin
+        mkdir output/lib
+        copy harbour/lib/darwin/clang/*.a output/lib
+        mkdir output/include 
+        copy harbour/include output/include
         
     - name: Get current time
       uses: srfrnk/current-time@master
