@@ -28,6 +28,7 @@ jobs:
          (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk-x64.zip', 'C:\temp\acesdk-x64.zip')
          Expand-Archive -LiteralPath C:\temp\acesdk-x64.zip -DestinationPath C:\acesdk -Force
          (Get-Content -path harbour\config\win\bcc.mk) -replace 'c0x64.obj','C:\bcc7164\lib\c0x64.o' | Set-Content -path harbour\config\win\bcc.mk
+         (Get-Content -path harbour\config\win\bcc.mk) -replace '-w-sig- -w-aus- -w-ccc- -w-csu- -w-par- -w-rch- -w-ucp- -w-use- -w-prc- -w-pia-','' | Set-Content -path harbour\config\win\bcc.mk
          (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/blob/master/.github/temp/xmath.a?raw=true', 'C:\bcc7164\lib\xmath.a')
          
     - name: Compile Harbour
