@@ -50,7 +50,7 @@ jobs:
         set HB_USER_RESFLAGS=-Ic:\bcc7164\include\windows\sdk\
         set HB_TRACE=yes
         set HB_USER_LDFLAGS=-Lc:\bcc7164\LIB -Lharbour\lib\win\bcc64 
-        set HB_USER_LIBS=-lxmath
+        set HB_USER_LIBS=-Lc:\bcc7164\LIB -lxmath
         win-make.exe
         
     - name: Create output folders
