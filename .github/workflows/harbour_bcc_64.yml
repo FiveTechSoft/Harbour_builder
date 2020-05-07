@@ -1,6 +1,8 @@
 name: Harbour for Windows 64 using BCC
 
 on:
+  watch:
+   types: [started]
   push:
     branches: [master]
 
