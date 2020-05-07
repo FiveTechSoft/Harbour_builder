@@ -40,7 +40,7 @@ jobs:
         mkdir output/bin
         cp harbour/bin/linux/gcc/* output/bin
         mkdir output/lib
-        cp harbour/lib/linux/gcc/*.lib output/lib
+        cp harbour/lib/linux/gcc/*.a output/lib
         mkdir output/include 
         cp harbour/include/* output/include        
         
