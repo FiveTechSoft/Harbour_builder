@@ -66,7 +66,7 @@ jobs:
         mkdir output\bin
         copy harbour\bin\win\bcc64\*.exe output\bin
         mkdir output\lib
-        copy harbour\lib\win\bcc64\*.lib output\lib
+        copy harbour\lib\win\bcc64\*.a output\lib
         mkdir output\include 
         copy harbour\include output\include
         
