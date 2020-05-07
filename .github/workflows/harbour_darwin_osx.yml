@@ -29,4 +29,28 @@ jobs:
         export HB_WITH_CURL=/usr/local/Cellar/curl/7.69.1/include/
         export HB_BUILD_CONTRIBS=""
         make
+        
+    - name: Create output folders
+      run: |
+        mkdir output
+        mkdir output\bin
+        copy harbour\bin\darwin\clang\* output\bin
+        mkdir output\lib
+        copy harbour\lib\win\bcc64\*.a output\lib
+        mkdir output\include 
+        copy harbour\include output\include
+        
+    - name: Get current time
+      uses: srfrnk/current-time@master
+      id: current-time
+      with:
+        format: YYYY_MM_DD
+ 
+    - name: Upload Harbour to artifact
+      env:
+         TIME: "${{ steps.current-time.outputs.formattedTime }}"
+      uses: actions/upload-artifact@v2
+      with:
+       name: harbour_darwin_osx_${{ env.TIME }}
+       path: output        
       
