@@ -38,7 +38,7 @@ jobs:
         mkdir output/lib
         cp harbour/lib/darwin/clang/*.a output/lib
         mkdir output/include 
-        cp harbour/include output/include
+        cp harbour/include/* output/include
         
     - name: Get current time
       uses: srfrnk/current-time@master
