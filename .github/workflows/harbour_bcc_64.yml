@@ -32,6 +32,7 @@ jobs:
          (Get-Content -path harbour\config\win\bcc.mk) -replace '-CP437','' | Set-Content -path harbour\config\win\bcc.mk
          (Get-Content -path harbour\utils\hbmk2\hbmk2.prg) -replace 'c0x64.obj','C:\bcc7164\lib\c0x64.o' | Set-Content -path harbour\utils\hbmk2\hbmk2.prg
          (Get-Content -path harbour\utils\hbmk2\hbmk2.prg) -replace 'cw64mt.lib','cw64mt.a' | Set-Content -path harbour\utils\hbmk2\hbmk2.prg
+         (Get-Content -path harbour\utils\hbmk2\hbmk2.prg) -replace 'import64.lib','import64.a' | Set-Content -path harbour\utils\hbmk2\hbmk2.prg
          (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/blob/master/.github/temp/xmath.a?raw=true', 'C:\bcc7164\lib\xmath.a')
          
     - name: Compile Harbour
