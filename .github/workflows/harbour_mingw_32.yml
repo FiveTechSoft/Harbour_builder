@@ -36,7 +36,7 @@ jobs:
         set HB_WITH_OPENSSL=C:\OpenSSL\include
         set HB_WITH_CURL=C:\curl\include
         set HB_WITH_ADS=C:\acesdk        
-        set HB_COMPILER=bcc
+        set HB_COMPILER=mingw
         SET HB_BUILD_CONTRIB_DYN=no
         SET HB_BUILD_DYN=no
         set HB_USER_RESFLAGS=-Ic:\bcc7\include\windows\sdk\
