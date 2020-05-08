@@ -1,6 +1,7 @@
 name: Harbour for Windows 64 using MinGW
 
 on:
+  push:
   watch:
    types: [started]
 
@@ -19,7 +20,6 @@ jobs:
 
     - name: Install dependencies
       run: |
-         choco install mingw
          choco install openssl
          choco install curl
          (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
