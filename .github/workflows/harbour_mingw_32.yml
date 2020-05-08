@@ -2,7 +2,8 @@ name: Harbour for Windows 32 using MinGW
 
 on:
   watch:
-   types: [started]
+    push:    
+    types: [started]
 
 jobs:
   build:
