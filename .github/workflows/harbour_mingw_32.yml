@@ -43,6 +43,7 @@ jobs:
         set path=c:\mingw32\bin;%path%
         c:\mingw32\bin\gcc --version
         gcc --version
+        set
         win-make.exe
         
     - name: Create output folders
