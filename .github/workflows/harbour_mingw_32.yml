@@ -19,7 +19,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-         choco install mingw--x86 --params '"/installLocation:C:"'
+         choco install mingw --x86 --params '"/installLocation:C:"'
          choco install openssl
          choco install curl
          (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
