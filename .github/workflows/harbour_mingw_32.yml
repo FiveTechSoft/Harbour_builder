@@ -37,8 +37,6 @@ jobs:
         set HB_COMPILER=mingw
         set HB_BUILD_CONTRIB_DYN=no
         set HB_BUILD_DYN=no
-        set HB_USER_RESFLAGS=-Ic:\bcc7\include\windows\sdk\
-        set HB_USER_CFLAGS=-mtune=generic
         win-make.exe
         
     - name: Create output folders
