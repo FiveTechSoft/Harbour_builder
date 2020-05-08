@@ -1,0 +1,68 @@
+name: Harbour for Windows 32 using MinGW
+
+on:
+  watch:
+   types: [started]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    if: github.actor == github.event.repository.owner.login
+    
+    steps:    
+    - name: Checkout harbour/core repo
+      uses: actions/checkout@v2
+      with:
+       repository: harbour/core
+       path: harbour
+
+    - name: Install dependencies
+      run: |
+         choco install apache-httpd --x86 --params '"/installLocation:C:"'
+         choco install openssl
+         choco install curl
+         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
+         Expand-Archive -LiteralPath C:\temp\acesdk.zip -DestinationPath C:\acesdk -Force         
+         
+    - name: Compile Harbour
+      shell: cmd
+      run: |
+        cd harbour
+        set path=c:\MinGW\bin
+        set HB_BUILD_MODE=c
+        set HB_USER_PRGFLAGS=-l-
+        set HB_BUILD_CONTRIBS=
+        set HB_WITH_OPENSSL=C:\OpenSSL\include
+        set HB_WITH_CURL=C:\curl\include
+        set HB_WITH_ADS=C:\acesdk        
+        set HB_COMPILER=bcc
+        SET HB_BUILD_CONTRIB_DYN=no
+        SET HB_BUILD_DYN=no
+        set HB_USER_RESFLAGS=-Ic:\bcc7\include\windows\sdk\
+        win-make.exe
+        
+    - name: Create output folders
+      shell: cmd
+      run: |
+        mkdir output
+        mkdir output\bin
+        copy harbour\bin\win\mingw\*.exe output\bin
+        mkdir output\lib
+        copy harbour\lib\win\mingw\*.lib output\lib
+        mkdir output\include 
+        copy harbour\include output\include
+        
+    - name: Get current time
+      uses: srfrnk/current-time@master
+      id: current-time
+      with:
+        format: YYYY_MM_DD
+ 
+    - name: Upload Harbour to artifact
+      env:
+         TIME: "${{ steps.current-time.outputs.formattedTime }}"
+      uses: actions/upload-artifact@v2
+      with:
+       name: harbour_win32_mingw_${{ env.TIME }}
+       path: output
