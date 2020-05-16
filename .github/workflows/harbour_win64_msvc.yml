@@ -58,7 +58,7 @@ jobs:
           mkdir output\bin
           mkdir output\lib
           mkdir output\include
-          copy D:\a\Harbour_builder\Harbour_builder\harbour\bin\win\msvc64\*.* output\bin
+          copy D:\a\Harbour_builder\Harbour_builder\harbour\bin\win\msvc64\*.exe output\bin
           copy D:\a\Harbour_builder\Harbour_builder\harbour\lib\win\msvc64\*.* output\lib
           copy D:\a\Harbour_builder\Harbour_builder\harbour\include\*.* output\include 
         
