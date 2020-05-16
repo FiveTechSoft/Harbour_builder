@@ -58,7 +58,7 @@ jobs:
           mkdir output\lib
           mkdir output\include
           copy bin\win\msvc64\*.* output\bin
-          copy bin\lib\msvc64\*.* output\lib
+          copy lib\win\msvc64\*.* output\lib
           copy include\*.* output\include 
         
       - name: Get current time
