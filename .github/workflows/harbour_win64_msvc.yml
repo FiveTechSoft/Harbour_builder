@@ -53,6 +53,7 @@ jobs:
       - name: Create output folders
         shell: cmd
         run: |
+          pwd
           mkdir output
           mkdir output\bin
           mkdir output\lib
