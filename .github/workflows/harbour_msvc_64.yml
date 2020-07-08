@@ -2,8 +2,6 @@ name: Harbour for Windows 64 using MSVC
 
 on:
   push:
-  watch:
-   types: [started]
 
 jobs:
   build:
