@@ -39,20 +39,27 @@ jobs:
         set HB_COMPILER=msvc
         win-make.exe
         
-    - name: Upload bins to artifact
+    - name: Create output folders
+      shell: cmd
+      run: |
+        mkdir output
+        mkdir output\bin
+        copy harbour\bin\win\msvc\*.exe output\bin
+        mkdir output\lib
+        copy harbour\lib\win\msvc\*.lib output\lib
+        mkdir output\include 
+        copy harbour\include output\include
+        
+    - name: Get current time
+      uses: srfrnk/current-time@master
+      id: current-time
+      with:
+        format: YYYY_MM_DD
+ 
+    - name: Upload Harbour to artifact
+      env:
+         TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: harbour_win32_msvc
-       path: harbour/bin/win/msvc
-
-    - name: Upload libs to artifact
-      uses: actions/upload-artifact@v2
-      with:
-       name: harbour_win32_msvc
-       path: harbour/lib/win/msvc
-
-    - name: Upload includes to artifact
-      uses: actions/upload-artifact@v2
-      with:
-       name: harbour_win32_msvc
-       path: harbour/include
+       name: harbour_win32_msvc_${{ env.TIME }}
+       path: output
