@@ -48,7 +48,7 @@ jobs:
         mkdir output\bin
         copy harbour\bin\win\mingw\*.exe output\bin
         mkdir output\lib
-        copy harbour\lib\win\mingw\*.lib output\lib
+        copy harbour\lib\win\mingw\*.a output\lib
         mkdir output\include 
         copy harbour\include output\include
         
