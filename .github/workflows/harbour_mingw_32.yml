@@ -34,7 +34,9 @@ jobs:
         set HB_BUILD_CONTRIBS=
         set HB_WITH_OPENSSL=C:\OpenSSL\include
         set HB_WITH_CURL=C:\curl\include
-        set HB_WITH_ADS=C:\acesdk        
+        set HB_WITH_ADS=C:\acesdk 
+        set HB_STATIC_OPENSSL=yes
+        set HB_STATIC_CURL=yes       
         set HB_COMPILER=mingw
         set HB_BUILD_CONTRIB_DYN=no
         set HB_BUILD_DYN=no
