@@ -37,6 +37,8 @@ jobs:
         set HB_OPENSSL_STATIC=yes        
         set HB_STATIC_OPENSSL=yes        
         set HB_STATIC_CURL=yes    
+        set HB_STATIC_OPENSSL=yes
+        set HB_STATIC_CURL=yes
         set HB_COMPILER=mingw64
         SET HB_BUILD_CONTRIB_DYN=no
         SET HB_BUILD_DYN=no
