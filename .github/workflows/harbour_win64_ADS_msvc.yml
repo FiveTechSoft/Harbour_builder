@@ -1,4 +1,4 @@
-name: Harbour for Win64 ad ADS using msvc
+name: Harbour for Win64 and ADS using msvc
 
 on:
   push:
