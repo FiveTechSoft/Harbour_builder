@@ -37,7 +37,7 @@ jobs:
         set HB_WITH_CURL=C:\curl\include
         set HB_STATIC_OPENSSL=yes
         set HB_STATIC_CURL=yes
-        set HB_COMPILER=msvc
+        set HB_COMPILER=msvc64
         win-make.exe
         
     - name: Create output folders
