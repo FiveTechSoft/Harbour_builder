@@ -1,9 +1,7 @@
 name: Harbour for Apple Darwin
 
 on:
-  push:
-  watch:
-   types: [started]
+  workflow_dispatch:
 
 jobs:
   build:
