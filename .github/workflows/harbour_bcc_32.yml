@@ -61,9 +61,9 @@ jobs:
         
     - name: Get current time
       id: current-time
-      uses: gerred/format-date@v1.0.0
+      uses: Kaven-Universe/github-action-current-date-time@v1
       with:
-         format: 'YYYYMMDD'
+       format: "yyyyMMdd"
   
     - name: Upload Harbour to artifact
       env:
