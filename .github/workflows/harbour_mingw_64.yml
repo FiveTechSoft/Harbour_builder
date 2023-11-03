@@ -1,9 +1,7 @@
 name: Harbour for Windows 64 using MinGW
 
 on:
-  push:
-  watch:
-   types: [started]
+  workflow_dispatch:
 
 jobs:
   build:
