@@ -60,15 +60,15 @@ jobs:
         copy harbour\include output\include
         
     - name: Get current time
-      uses: srfrnk/current-time@master
       id: current-time
+      uses: gerred/format-date@v1.0.0
       with:
-        format: YYYY_MM_DD
- 
+         format: 'YYYYMMDD'
+  
     - name: Upload Harbour to artifact
       env:
-         TIME: "${{ steps.current-time.outputs.formattedTime }}"
-      uses: actions/upload-artifact@v2
+       TIME: "${{ steps.current-time.outputs.formattedTime }}"
+      uses: actions/upload-artifact@v3
       with:
        name: harbour_win32_bcc_${{ env.TIME }}
        path: output
