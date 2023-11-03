@@ -1,9 +1,7 @@
 name: Harbour for Ubuntu 64-bits
 
 on:
-  push:
-  watch:
-   types: [started]
+  workflow_dispatch:
 
 jobs:
   build:
