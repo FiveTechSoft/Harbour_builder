@@ -11,10 +11,10 @@ jobs:
     runs-on: windows-11-arm   # native Windows on ARM64
 
     steps:
-    - name: Checkout harbour/core repo
+    - name: Checkout FiveTechSoft/harbour repo
       uses: actions/checkout@v4
       with:
-       repository: harbour/core
+       repository: FiveTechSoft/harbour
        path: harbour
 
     - name: Setup MSVC environment (arm64)

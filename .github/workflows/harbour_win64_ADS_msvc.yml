@@ -13,10 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Checkout harbour/core repo
+      - name: Checkout FiveTechSoft/harbour repo
         uses: actions/checkout@v4
         with:
-          repository: harbour/core
+          repository: FiveTechSoft/harbour
           path: harbour
 
       - name: Installing dependencies

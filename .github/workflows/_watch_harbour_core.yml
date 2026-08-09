@@ -1,4 +1,4 @@
-name: Watch harbour/core and trigger all builds
+name: Watch FiveTechSoft/harbour and trigger all builds
 
 on:
   schedule:
@@ -25,18 +25,18 @@ jobs:
       - name: Checkout self
         uses: actions/checkout@v4
 
-      - name: Resolve latest harbour/core SHA
+      - name: Resolve latest FiveTechSoft/harbour SHA
         id: core
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          sha=$(gh api repos/harbour/core/commits/master --jq .sha)
+          sha=$(gh api repos/FiveTechSoft/harbour/commits/master --jq .sha)
           if [ -z "$sha" ]; then
-            echo "Failed to resolve harbour/core HEAD" >&2
+            echo "Failed to resolve FiveTechSoft/harbour HEAD" >&2
             exit 1
           fi
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
-          echo "Latest harbour/core SHA: $sha"
+          echo "Latest FiveTechSoft/harbour SHA: $sha"
 
       - name: Read last built SHA
         id: last
@@ -56,7 +56,7 @@ jobs:
             echo "reason=manual force" >> "$GITHUB_OUTPUT"
             echo "dispatch=true" >> "$GITHUB_OUTPUT"
           elif [ "${{ steps.core.outputs.sha }}" != "${{ steps.last.outputs.sha }}" ]; then
-            echo "reason=harbour/core changed" >> "$GITHUB_OUTPUT"
+            echo "reason=FiveTechSoft/harbour changed" >> "$GITHUB_OUTPUT"
             echo "dispatch=true" >> "$GITHUB_OUTPUT"
           else
             echo "reason=unchanged" >> "$GITHUB_OUTPUT"
@@ -125,8 +125,8 @@ jobs:
             runs_json=$(echo "$runs_json" | jq --arg wf "$wf" --argjson r "$slim" \
               '. + [{file:$wf, run:$r}]')
           done
-          # Recent upstream commits — 10 latest from harbour/core master
-          commits_json=$(gh api 'repos/harbour/core/commits?per_page=10' \
+          # Recent upstream commits — 10 latest from FiveTechSoft/harbour master
+          commits_json=$(gh api 'repos/FiveTechSoft/harbour/commits?per_page=10' \
             --jq '[.[] | {
               sha,
               short_sha: (.sha[0:7]),
@@ -182,4 +182,4 @@ jobs:
       - name: Skipped notice
         if: steps.decide.outputs.dispatch != 'true'
         run: |
-          echo "No dispatch — harbour/core unchanged at ${{ steps.core.outputs.sha }}"
+          echo "No dispatch — FiveTechSoft/harbour unchanged at ${{ steps.core.outputs.sha }}"

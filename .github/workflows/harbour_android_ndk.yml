@@ -18,10 +18,10 @@ jobs:
           - { abi: x86_64, triple: x86_64-linux-android,      pfx: x86_64-linux-android,     cpu: x86_64 }
 
     steps:
-    - name: Checkout harbour/core repo
+    - name: Checkout FiveTechSoft/harbour repo
       uses: actions/checkout@v4
       with:
-       repository: harbour/core
+       repository: FiveTechSoft/harbour
        path: harbour
 
     - name: Setup Android NDK

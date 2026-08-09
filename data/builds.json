@@ -222,7 +222,7 @@
     {
       "author": "FiveTechSoft",
       "date": "2026-07-07T15:04:13Z",
-      "html_url": "https://github.com/harbour/core/commit/6df4c08b98c808904e0c19effbc09523af010ed6",
+      "html_url": "https://github.com/FiveTechSoft/harbour/commit/6df4c08b98c808904e0c19effbc09523af010ed6",
       "sha": "6df4c08b98c808904e0c19effbc09523af010ed6",
       "short_sha": "6df4c08",
       "subject": "Fix release-windows: use sequential install to avoid parallel race"
@@ -230,7 +230,7 @@
     {
       "author": "FiveTechSoft",
       "date": "2026-07-07T14:53:44Z",
-      "html_url": "https://github.com/harbour/core/commit/bc4ea89e214c0cf8f50c4df6978065c45d8de0c9",
+      "html_url": "https://github.com/FiveTechSoft/harbour/commit/bc4ea89e214c0cf8f50c4df6978065c45d8de0c9",
       "sha": "bc4ea89e214c0cf8f50c4df6978065c45d8de0c9",
       "short_sha": "bc4ea89",
       "subject": "Fix release-windows: use mingw-w64-x86_64-7zip package name"
@@ -238,7 +238,7 @@
     {
       "author": "FiveTechSoft",
       "date": "2026-07-07T14:52:34Z",
-      "html_url": "https://github.com/harbour/core/commit/eac95cbf9502b425da98d33c3fef54dbd7df95a1",
+      "html_url": "https://github.com/FiveTechSoft/harbour/commit/eac95cbf9502b425da98d33c3fef54dbd7df95a1",
       "sha": "eac95cbf9502b425da98d33c3fef54dbd7df95a1",
       "short_sha": "eac95cb",
       "subject": "Add Windows binary release build scripts and CI workflow"
@@ -246,7 +246,7 @@
     {
       "author": "FiveTechSoft",
       "date": "2026-07-07T14:27:06Z",
-      "html_url": "https://github.com/harbour/core/commit/bb8f5264f604382b89daca22d5b5151ad1c0d5d3",
+      "html_url": "https://github.com/FiveTechSoft/harbour/commit/bb8f5264f604382b89daca22d5b5151ad1c0d5d3",
       "sha": "bb8f5264f604382b89daca22d5b5151ad1c0d5d3",
       "short_sha": "bb8f526",
       "subject": "Fix release workflow: match CI build, package sources only"
@@ -254,7 +254,7 @@
     {
       "author": "FiveTechSoft",
       "date": "2026-07-07T14:20:48Z",
-      "html_url": "https://github.com/harbour/core/commit/482fcde3972d96bcbf464c930b8a309f89b27a8b",
+      "html_url": "https://github.com/FiveTechSoft/harbour/commit/482fcde3972d96bcbf464c930b8a309f89b27a8b",
       "sha": "482fcde3972d96bcbf464c930b8a309f89b27a8b",
       "short_sha": "482fcde",
       "subject": "Trunk version bump: 3.2.0 -> 3.2.1dev"
@@ -262,7 +262,7 @@
     {
       "author": "FiveTechSoft",
       "date": "2026-07-07T14:20:23Z",
-      "html_url": "https://github.com/harbour/core/commit/2ebdd689d46866407d7ae824c04e6d9ce9943ada",
+      "html_url": "https://github.com/FiveTechSoft/harbour/commit/2ebdd689d46866407d7ae824c04e6d9ce9943ada",
       "sha": "2ebdd689d46866407d7ae824c04e6d9ce9943ada",
       "short_sha": "2ebdd68",
       "subject": "Release Harbour 3.2.0"
@@ -270,7 +270,7 @@
     {
       "author": "FiveTechSoft",
       "date": "2026-07-07T14:17:30Z",
-      "html_url": "https://github.com/harbour/core/commit/01a54fe431aa8f4dc6f073c733bbb105d019293a",
+      "html_url": "https://github.com/FiveTechSoft/harbour/commit/01a54fe431aa8f4dc6f073c733bbb105d019293a",
       "sha": "01a54fe431aa8f4dc6f073c733bbb105d019293a",
       "short_sha": "01a54fe",
       "subject": "Document release process and add GitHub Actions release workflow"
@@ -278,7 +278,7 @@
     {
       "author": "alcz",
       "date": "2026-05-14T12:49:47Z",
-      "html_url": "https://github.com/harbour/core/commit/0d3b43954ab868e4b7f45908c4e274d0fbe0ba3d",
+      "html_url": "https://github.com/FiveTechSoft/harbour/commit/0d3b43954ab868e4b7f45908c4e274d0fbe0ba3d",
       "sha": "0d3b43954ab868e4b7f45908c4e274d0fbe0ba3d",
       "short_sha": "0d3b439",
       "subject": "2026-05-14 14:50 UTC+0200 Aleksander Czajczynski (hb fki.pl)"
@@ -286,7 +286,7 @@
     {
       "author": "druzus",
       "date": "2026-02-28T14:33:57Z",
-      "html_url": "https://github.com/harbour/core/commit/0f28a7bb90d179c5ba67af16396ebdfafad3b646",
+      "html_url": "https://github.com/FiveTechSoft/harbour/commit/0f28a7bb90d179c5ba67af16396ebdfafad3b646",
       "sha": "0f28a7bb90d179c5ba67af16396ebdfafad3b646",
       "short_sha": "0f28a7b",
       "subject": "2026-02-28 15:33 UTC+0100 Przemyslaw Czerpak (druzus/at/poczta.onet.pl)"
@@ -294,7 +294,7 @@
     {
       "author": "druzus",
       "date": "2026-02-27T20:27:52Z",
-      "html_url": "https://github.com/harbour/core/commit/99434cd641bc20f84545a974c0a9794444114c9d",
+      "html_url": "https://github.com/FiveTechSoft/harbour/commit/99434cd641bc20f84545a974c0a9794444114c9d",
       "sha": "99434cd641bc20f84545a974c0a9794444114c9d",
       "short_sha": "99434cd",
       "subject": "2026-02-27 21:27 UTC+0100 Przemyslaw Czerpak (druzus/at/poczta.onet.pl)"

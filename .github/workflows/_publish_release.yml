@@ -1,4 +1,4 @@
-name: Publish release for harbour/core SHA
+name: Publish release for FiveTechSoft/harbour SHA
 
 on:
   workflow_run:
@@ -33,7 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Read tracked harbour/core SHA
+      - name: Read tracked FiveTechSoft/harbour SHA
         id: sha
         run: |
           if [ ! -s .github/last_core_sha.txt ]; then
@@ -48,7 +48,7 @@ jobs:
           echo "full=$full" >> "$GITHUB_OUTPUT"
           echo "short=$short" >> "$GITHUB_OUTPUT"
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
-          echo "Target tag: $tag (harbour/core@$full)"
+          echo "Target tag: $tag (FiveTechSoft/harbour@$full)"
 
       - name: Skip if release already exists
         id: exists
@@ -131,7 +131,7 @@ jobs:
           for wf_dir in release-staging/*/; do
             for art_dir in "$wf_dir"*/; do
               art_name=$(basename "$art_dir")
-              # Append harbour/core short SHA to the zip name for traceability.
+              # Append FiveTechSoft/harbour short SHA to the zip name for traceability.
               zip_name="${art_name}_core-${CORE_SHORT}.zip"
               echo "Zipping $art_dir -> assets/$zip_name"
               (cd "$art_dir" && zip -qr "$GITHUB_WORKSPACE/assets/$zip_name" .)
@@ -150,7 +150,7 @@ jobs:
           full="${{ steps.sha.outputs.full }}"
           date=$(date -u +%Y-%m-%d)
           notes=$(cat <<EOF
-          Automatic build of [harbour/core@${short}](https://github.com/harbour/core/commit/${full})
+          Automatic build of [FiveTechSoft/harbour@${short}](https://github.com/FiveTechSoft/harbour/commit/${full})
           for every supported flavour.
 
           - Date (UTC): ${date}
@@ -164,7 +164,7 @@ jobs:
           )
           gh release create "$tag" \
             --repo "$GITHUB_REPOSITORY" \
-            --title "Harbour built from core@${short}" \
+            --title "Harbour built from FiveTechSoft/harbour@${short}" \
             --notes "$notes" \
             assets/*.zip
           echo "Released $tag with $(ls assets/*.zip | wc -l) assets."

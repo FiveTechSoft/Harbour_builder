@@ -24,10 +24,10 @@ jobs:
           - { name: iossimulator_x64, sdk: iphonesimulator,  arch: x86_64, minflag: "-mios-simulator-version-min=13.0" }
 
     steps:
-    - name: Checkout harbour/core repo
+    - name: Checkout FiveTechSoft/harbour repo
       uses: actions/checkout@v4
       with:
-       repository: harbour/core
+       repository: FiveTechSoft/harbour
        path: harbour
 
     - name: Build host Harbour (compiler + hbmk2)
