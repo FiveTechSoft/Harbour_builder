@@ -34,7 +34,7 @@ jobs:
       shell: cmd
       run: |
         cd harbour
-        set path=c:\bcc7\bin
+        set path=c:\bcc77\bin
         set HB_BUILD_MODE=c
         set HB_USER_PRGFLAGS=-l-
         set HB_BUILD_CONTRIBS=
@@ -46,7 +46,7 @@ jobs:
         set HB_COMPILER=bcc
         SET HB_BUILD_CONTRIB_DYN=no
         SET HB_BUILD_DYN=no
-        set HB_USER_RESFLAGS=-Ic:\bcc7\include\windows\sdk\
+        set HB_USER_RESFLAGS=-Ic:\bcc77\include\windows\sdk\
         set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
         win-make.exe || exit /b 1
         win-make.exe install || exit /b 1
