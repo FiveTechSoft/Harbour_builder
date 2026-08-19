@@ -35,6 +35,7 @@ jobs:
       run: |
         cd harbour
         set path=c:\bcc77\bin
+        set LIB=c:\bcc77\lib
         set HB_BUILD_MODE=c
         set HB_USER_CFLAGS=-w-sig -w-8071 -w-8084
         set HB_USER_PRGFLAGS=-l-
