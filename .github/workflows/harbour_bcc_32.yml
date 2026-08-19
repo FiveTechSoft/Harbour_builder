@@ -25,8 +25,8 @@ jobs:
          (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/curl-7.54.0-win32-mingw.zip', 'C:\temp\curl-7.54.0-win32-mingw.zip')
          Expand-Archive -LiteralPath C:\temp\curl-7.54.0-win32-mingw.zip -DestinationPath C:\curl -Force
          (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/raw/master/.github/temp/win32/bcc7/libcurl.lib', 'C:\temp\libcurl.zip')
-         (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/raw/master/.github/temp/bcc70.zip', 'C:\temp\bcc70.zip')
-         Expand-Archive -LiteralPath C:\temp\bcc70.zip -DestinationPath C:\bcc7 -Force
+         (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/raw/master/.github/temp/bcc77.zip', 'C:\temp\bcc77.zip')
+         Expand-Archive -LiteralPath C:\temp\bcc77.zip -DestinationPath C:\bcc77 -Force
          (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
          Expand-Archive -LiteralPath C:\temp\acesdk.zip -DestinationPath C:\acesdk -Force
 
