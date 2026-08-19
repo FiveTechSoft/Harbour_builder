@@ -34,7 +34,7 @@ jobs:
       shell: cmd
       run: |
         cd harbour
-        copy "..\\.github\\temp\\winmm.lib" "c:\\bcc77\\lib\\winmm.lib"
+        copy "%GITHUB_WORKSPACE%\\temp\\winmm.lib" "c:\\bcc77\\lib\\winmm.lib"
         set path=c:\bcc77\bin
         set LIB=c:\bcc77\lib
         set HB_BUILD_MODE=c
