@@ -38,7 +38,7 @@ jobs:
         set LIB=c:\bcc77\lib
         set HB_BUILD_MODE=c
         set HB_USER_CFLAGS=-w-sig -w-8071 -w-8084
-        set HB_USER_LDFLAGS=-L"c:\bcc77\lib"
+        set HB_USER_LDFLAGS=-L"c:\bcc77\lib" -L"c:\bcc77\lib\psdk"
         set HB_USER_PRGFLAGS=-l-
         set HB_BUILD_CONTRIBS=
         set HB_WITH_OPENSSL=C:\OpenSSL\include
@@ -54,7 +54,6 @@ jobs:
         win-make.exe || exit /b 1
         win-make.exe install || exit /b 1
         if exist "%GITHUB_WORKSPACE%\temp\libcurl.lib" copy "%GITHUB_WORKSPACE%\temp\libcurl.lib" "%HB_INSTALL_PREFIX%\lib\win\bcc\"
-        if exist "%GITHUB_WORKSPACE%\temp\winmm.lib" copy "%GITHUB_WORKSPACE%\temp\winmm.lib" "%HB_INSTALL_PREFIX%\lib\win\bcc\"
 
     - name: Get current time
       id: current-time
