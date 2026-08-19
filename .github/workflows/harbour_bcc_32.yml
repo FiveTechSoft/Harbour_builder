@@ -84,6 +84,13 @@ jobs:
           $tc = [System.IO.File]::ReadAllText($tinymt, [System.Text.Encoding]::UTF8)
           [System.IO.File]::WriteAllText($tinymt, "#pragma warn -8056`n" + $tc, [System.Text.Encoding]::UTF8)
           Write-Host "Patched tinymt64.h: added #pragma warn -8056"
+        Get-ChildItem 'contrib\*\' -Filter '*.c' -Recurse -ErrorAction SilentlyContinue | ForEach-Object {
+          $fc = [System.IO.File]::ReadAllText($_.FullName, [System.Text.Encoding]::UTF8)
+          if (-not $fc.StartsWith('#pragma')) {
+            [System.IO.File]::WriteAllText($_.FullName, "#pragma warn -8065`n#pragma warn -8045`n#pragma warn -8056`n#pragma warn -8080`n" + $fc, [System.Text.Encoding]::UTF8)
+          }
+        }
+        Write-Host "Added pragmas to all contrib .c files"
         }
         Write-Host "Verifying make.hb content around line 567:"
         $lines = [System.IO.File]::ReadAllLines($makeHb, [System.Text.Encoding]::UTF8)
