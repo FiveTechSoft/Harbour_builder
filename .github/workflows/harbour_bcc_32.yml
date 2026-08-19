@@ -48,11 +48,11 @@ jobs:
         if (Test-Path $bccCfg) {
           $cfgContent = [System.IO.File]::ReadAllText($bccCfg, [System.Text.Encoding]::ASCII)
           if ($cfgContent -notmatch 'w-8065') {
-            $cfgContent = $cfgContent.TrimEnd() + "`n-w-8065`n"
+            $cfgContent = $cfgContent.TrimEnd() + "`n-w-8065`n-w-8045`n-w-8080`n"
             [System.IO.File]::WriteAllText($bccCfg, $cfgContent, [System.Text.Encoding]::ASCII)
           }
         } else {
-          [System.IO.File]::WriteAllText($bccCfg, "-w-8065`n", [System.Text.Encoding]::ASCII)
+          [System.IO.File]::WriteAllText($bccCfg, "-w-8065`n-w-8045`n-w-8080`n", [System.Text.Encoding]::ASCII)
         }
         Write-Host "Created bcc32.cfg with -w-8065"
         $evp = Join-Path $PWD 'contrib\hbssl\evppkey.c'
@@ -60,6 +60,25 @@ jobs:
         $evpContent = "#pragma warn -8065`n#pragma warn -8045`n" + $evpContent
         [System.IO.File]::WriteAllText($evp, $evpContent, [System.Text.Encoding]::UTF8)
         Write-Host "Patched evppkey.c: added #pragma warn -8065"
+        Get-ChildItem 'contrib\hbhpdf\3rd\libhpdf\hpdfenc*.c' | ForEach-Object {
+          $fc = [System.IO.File]::ReadAllText($_.FullName, [System.Text.Encoding]::UTF8)
+          if (-not $fc.StartsWith('#pragma')) {
+            [System.IO.File]::WriteAllText($_.FullName, "#pragma warn -8080`n" + $fc, [System.Text.Encoding]::UTF8)
+          }
+        }
+        Get-ChildItem 'contrib\hbhpdf\3rd\libhpdf\hpdffdf*.c' | ForEach-Object {
+          $fc = [System.IO.File]::ReadAllText($_.FullName, [System.Text.Encoding]::UTF8)
+          if (-not $fc.StartsWith('#pragma')) {
+            [System.IO.File]::WriteAllText($_.FullName, "#pragma warn -8080`n" + $fc, [System.Text.Encoding]::UTF8)
+          }
+        }
+        Get-ChildItem 'contrib\hbhpdf\3rd\libhpdf\hpdfpags.c' | ForEach-Object {
+          $fc = [System.IO.File]::ReadAllText($_.FullName, [System.Text.Encoding]::UTF8)
+          if (-not $fc.StartsWith('#pragma')) {
+            [System.IO.File]::WriteAllText($_.FullName, "#pragma warn -8080`n" + $fc, [System.Text.Encoding]::UTF8)
+          }
+        }
+        Write-Host "Patched hbhpdf font files: added #pragma warn -8080"
         Write-Host "Verifying make.hb content around line 567:"
         $lines = [System.IO.File]::ReadAllLines($makeHb, [System.Text.Encoding]::UTF8)
         for ($i = 565; $i -lt 570 -and $i -lt $lines.Length; $i++) {
