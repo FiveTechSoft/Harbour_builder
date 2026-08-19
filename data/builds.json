@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T05:23:17Z",
+  "generated_at": "2026-08-19T06:32:50Z",
   "upstream_sha": "a674457ce4509933f970f8db402a4d50fd3fdffb",
   "last_built_sha": "a674457ce4509933f970f8db402a4d50fd3fdffb",
   "just_dispatched": false,
@@ -15,10 +15,10 @@
         "status": "completed",
         "conclusion": "failure",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/32207027233",
-        "updated_at": "2026-08-19T02:01:58Z",
+        "updated_at": "2026-08-19T06:08:28Z",
         "created_at": "2026-08-19T02:01:12Z",
         "head_sha": "89ea4a2f6ae62f69e58633607e25358913641d18",
-        "run_attempt": 1
+        "run_attempt": 2
       }
     },
     {
