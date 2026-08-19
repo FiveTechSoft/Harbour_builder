@@ -112,8 +112,8 @@ jobs:
         SET HB_BUILD_DYN=no
         set HB_USER_RESFLAGS=-Ic:\\bcc77\\include\\windows\\sdk\\
         set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
-        if exist "contrib\hbexpat" rmdir /s /q "contrib\hbexpat"
         if exist "contrib\3rd\sqlite3" rmdir /s /q "contrib\3rd\sqlite3"
+        if exist "contrib\hbsqlit3" rmdir /s /q "contrib\hbsqlit3"
         if exist "contrib\hbxdiff" rmdir /s /q "contrib\hbxdiff"
         if exist "contrib\sddsqlt3" rmdir /s /q "contrib\sddsqlt3"
         win-make.exe || exit /b 1
