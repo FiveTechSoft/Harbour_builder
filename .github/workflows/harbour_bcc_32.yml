@@ -36,6 +36,7 @@ jobs:
         cd harbour
         set path=c:\bcc77\bin
         set HB_BUILD_MODE=c
+        set HB_USER_CFLAGS=-w-8071
         set HB_USER_PRGFLAGS=-l-
         set HB_BUILD_CONTRIBS=
         set HB_WITH_OPENSSL=C:\OpenSSL\include
