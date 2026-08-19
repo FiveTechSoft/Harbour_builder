@@ -36,7 +36,7 @@ jobs:
         cd harbour
         set path=c:\bcc77\bin
         set HB_BUILD_MODE=c
-        set HB_USER_CFLAGS=-w-sig
+        set HB_USER_CFLAGS=-w-sig -w-8071 -w-8084
         set HB_USER_PRGFLAGS=-l-
         set HB_BUILD_CONTRIBS=
         set HB_WITH_OPENSSL=C:\OpenSSL\include
@@ -49,7 +49,6 @@ jobs:
         SET HB_BUILD_DYN=no
         set HB_USER_RESFLAGS=-Ic:\\bcc77\\include\\windows\\sdk\\ -w
         set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
-        set HB_CFLAGS=-w-8071 -w-8084
         win-make.exe || exit /b 1
         win-make.exe install || exit /b 1
         if exist "%GITHUB_WORKSPACE%\temp\libcurl.lib" copy "%GITHUB_WORKSPACE%\temp\libcurl.lib" "%HB_INSTALL_PREFIX%\lib\win\bcc\"
