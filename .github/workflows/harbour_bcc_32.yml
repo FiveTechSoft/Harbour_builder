@@ -49,6 +49,7 @@ jobs:
         SET HB_BUILD_DYN=no
         set HB_USER_RESFLAGS=-Ic:\\bcc77\\include\\windows\\sdk\\ -w
         set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
+        set HB_CFLAGS=-w-8071
         win-make.exe || exit /b 1
         win-make.exe install || exit /b 1
         if exist "%GITHUB_WORKSPACE%\temp\libcurl.lib" copy "%GITHUB_WORKSPACE%\temp\libcurl.lib" "%HB_INSTALL_PREFIX%\lib\win\bcc\"
