@@ -37,7 +37,7 @@ jobs:
         set path=c:\bcc77\bin
         set LIB=c:\bcc77\lib
         set HB_BUILD_MODE=c
-        set HB_USER_CFLAGS=-w-sig -w-8071 -w-8084
+        set HB_USER_CFLAGS=-w-sig -w-8071 -w-8084 -w-8065
         set HB_USER_LDFLAGS=-L"c:\bcc77\lib" -L"c:\bcc77\lib\psdk"
         set HB_USER_PRGFLAGS=-l-
         set HB_BUILD_CONTRIBS=
@@ -55,7 +55,6 @@ jobs:
         if exist "contrib\3rd\sqlite3" rmdir /s /q "contrib\3rd\sqlite3"
         if exist "contrib\hbxdiff" rmdir /s /q "contrib\hbxdiff"
         powershell -Command "(Get-Content contrib\make.hb) -replace '-quiet','' | Set-Content contrib\make.hb"
-        powershell -Command "(Get-Content contrib\hbssl\evppkey.c) -replace '0x10000000L','0x10100000L' | Set-Content contrib\hbssl\evppkey.c"
         win-make.exe || exit /b 1
         win-make.exe install || exit /b 1
         if exist "%GITHUB_WORKSPACE%\temp\libcurl.lib" copy "%GITHUB_WORKSPACE%\temp\libcurl.lib" "%HB_INSTALL_PREFIX%\lib\win\bcc\"
