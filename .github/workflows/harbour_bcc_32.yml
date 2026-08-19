@@ -48,11 +48,11 @@ jobs:
         if (Test-Path $bccCfg) {
           $cfgContent = [System.IO.File]::ReadAllText($bccCfg, [System.Text.Encoding]::ASCII)
           if ($cfgContent -notmatch 'w-8065') {
-            $cfgContent = $cfgContent.TrimEnd() + "`n-w-8065`n-w-8045`n-w-8080`n"
+            $cfgContent = $cfgContent.TrimEnd() + "`n-w-8065`n-w-8045`n-w-8080`n-w-8056`n"
             [System.IO.File]::WriteAllText($bccCfg, $cfgContent, [System.Text.Encoding]::ASCII)
           }
         } else {
-          [System.IO.File]::WriteAllText($bccCfg, "-w-8065`n-w-8045`n-w-8080`n", [System.Text.Encoding]::ASCII)
+          [System.IO.File]::WriteAllText($bccCfg, "-w-8065`n-w-8045`n-w-8080`n-w-8056`n", [System.Text.Encoding]::ASCII)
         }
         Write-Host "Created bcc32.cfg with -w-8065"
         $evp = Join-Path $PWD 'contrib\hbssl\evppkey.c'
@@ -79,7 +79,7 @@ jobs:
           }
         }
         Write-Host "Patched hbhpdf font files: added #pragma warn -8080"
-        $tinymt = Join-Path $PWD 'hbtinymt\3rd\tinymt\tinymt64.h'
+        $tinymt = Join-Path $PWD 'contrib\hbtinymt\3rd\tinymt\tinymt64.h'
         if (Test-Path $tinymt) {
           $tc = [System.IO.File]::ReadAllText($tinymt, [System.Text.Encoding]::UTF8)
           [System.IO.File]::WriteAllText($tinymt, "#pragma warn -8056`n" + $tc, [System.Text.Encoding]::UTF8)
