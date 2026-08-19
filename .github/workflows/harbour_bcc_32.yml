@@ -34,7 +34,6 @@ jobs:
       shell: cmd
       run: |
         cd harbour
-        copy "%GITHUB_WORKSPACE%\temp\winmm.lib" "c:\bcc77\lib\winmm.lib"
         set path=c:\bcc77\bin
         set LIB=c:\bcc77\lib
         set HB_BUILD_MODE=c
@@ -55,6 +54,7 @@ jobs:
         win-make.exe || exit /b 1
         win-make.exe install || exit /b 1
         if exist "%GITHUB_WORKSPACE%\temp\libcurl.lib" copy "%GITHUB_WORKSPACE%\temp\libcurl.lib" "%HB_INSTALL_PREFIX%\lib\win\bcc\"
+        if exist "%GITHUB_WORKSPACE%\temp\winmm.lib" copy "%GITHUB_WORKSPACE%\temp\winmm.lib" "%HB_INSTALL_PREFIX%\lib\win\bcc\"
 
     - name: Get current time
       id: current-time
