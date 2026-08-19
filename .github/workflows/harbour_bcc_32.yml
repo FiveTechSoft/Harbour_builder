@@ -54,8 +54,8 @@ jobs:
         if exist "contrib\hbexpat" rmdir /s /q "contrib\hbexpat"
         if exist "contrib\3rd\sqlite3" rmdir /s /q "contrib\3rd\sqlite3"
         if exist "contrib\hbxdiff" rmdir /s /q "contrib\hbxdiff"
-        powershell -Command "(Get-Content contrib\make.hb) -replace '-quiet','' | Set-Content contrib\make.hb"
-        powershell -Command "Add-Content -Path 'contrib\hbssl\hbssl.hbp' -Value '{bcc}-cflag=-w-8065'"
+        powershell -Command "$c=[IO.File]::ReadAllText('contrib\make.hb'); [IO.File]::WriteAllText('contrib\make.hb',$c.Replace('-quiet',''))"
+        powershell -Command "[IO.File]::WriteAllText('c:\bcc77\bin\bcc32.cfg','-w-8065')"
         win-make.exe || exit /b 1
         win-make.exe install || exit /b 1
         if exist "%GITHUB_WORKSPACE%\temp\libcurl.lib" copy "%GITHUB_WORKSPACE%\temp\libcurl.lib" "%HB_INSTALL_PREFIX%\lib\win\bcc\"
