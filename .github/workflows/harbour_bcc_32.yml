@@ -54,8 +54,8 @@ jobs:
         if exist "contrib\hbexpat" rmdir /s /q "contrib\hbexpat"
         if exist "contrib\3rd\sqlite3" rmdir /s /q "contrib\3rd\sqlite3"
         if exist "contrib\hbxdiff" rmdir /s /q "contrib\hbxdiff"
-        powershell -Command "$c=[IO.File]::ReadAllText('contrib\make.hb'); [IO.File]::WriteAllText('contrib\make.hb',$c.Replace('-quiet',''))"
-        powershell -Command "[IO.File]::WriteAllText('c:\bcc77\bin\bcc32.cfg','-w-8065')"
+        powershell -NoProfile -Command "$p='contrib\make.hb'; $b=[System.IO.File]::ReadAllBytes($p); $t=[System.Text.Encoding]::ASCII.GetString($b); $t=$t.Replace('-quiet',''); [System.IO.File]::WriteAllBytes($p,[System.Text.Encoding]::ASCII.GetBytes($t))"
+        powershell -NoProfile -Command "$p='contrib\hbssl\hbssl.hbp'; $b=[System.IO.File]::ReadAllBytes($p); $t=[System.Text.Encoding]::ASCII.GetString($b); $t=$t.Replace('-iflag={bcc}-a','-iflag={bcc}-a -iflag={bcc}-w-8065'); [System.IO.File]::WriteAllBytes($p,[System.Text.Encoding]::ASCII.GetBytes($t))"
         win-make.exe || exit /b 1
         win-make.exe install || exit /b 1
         if exist "%GITHUB_WORKSPACE%\temp\libcurl.lib" copy "%GITHUB_WORKSPACE%\temp\libcurl.lib" "%HB_INSTALL_PREFIX%\lib\win\bcc\"
