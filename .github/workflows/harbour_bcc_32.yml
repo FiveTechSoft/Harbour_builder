@@ -55,6 +55,7 @@ jobs:
         if exist "contrib\3rd\sqlite3" rmdir /s /q "contrib\3rd\sqlite3"
         if exist "contrib\hbxdiff" rmdir /s /q "contrib\hbxdiff"
         powershell -Command "(Get-Content contrib\make.hb) -replace '-quiet','' | Set-Content contrib\make.hb"
+        powershell -Command "(Get-Content contrib\hbssl\hbssl.hbp) -replace '-iflag=\{bcc\}-a','-iflag={bcc}-a -iflag={bcc}-w-8065' | Set-Content contrib\hbssl\hbssl.hbp -Encoding UTF8"
         win-make.exe || exit /b 1
         win-make.exe install || exit /b 1
         if exist "%GITHUB_WORKSPACE%\temp\libcurl.lib" copy "%GITHUB_WORKSPACE%\temp\libcurl.lib" "%HB_INSTALL_PREFIX%\lib\win\bcc\"
