@@ -53,6 +53,7 @@ jobs:
         set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
         if exist "contrib\hbexpat" rmdir /s /q "contrib\hbexpat"
         if exist "contrib\3rd\sqlite3" rmdir /s /q "contrib\3rd\sqlite3"
+        if exist "contrib\hbxdiff" rmdir /s /q "contrib\hbxdiff"
         win-make.exe || exit /b 1
         win-make.exe install || exit /b 1
         if exist "%GITHUB_WORKSPACE%\temp\libcurl.lib" copy "%GITHUB_WORKSPACE%\temp\libcurl.lib" "%HB_INSTALL_PREFIX%\lib\win\bcc\"
