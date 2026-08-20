@@ -20,10 +20,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/OpenSSL-Win64.zip', 'C:\temp\OpenSSL-Win64.zip')
-         Expand-Archive -LiteralPath C:\temp\OpenSSL-Win64.zip -DestinationPath C:\OpenSSL -Force
-         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/curl-7.54.0-win64-mingw.zip', 'C:\temp\curl-7.54.0-win64-mingw.zip')
-         Expand-Archive -LiteralPath C:\temp\curl-7.54.0-win64-mingw.zip -DestinationPath C:\curl -Force
+         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/OpenSSL-Win32.zip', 'C:\temp\OpenSSL-Win32.zip')
+         Expand-Archive -LiteralPath C:\temp\OpenSSL-Win32.zip -DestinationPath C:\OpenSSL -Force
+         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/curl-7.54.0-win32-mingw.zip', 'C:\temp\curl-7.54.0-win32-mingw.zip')
+         Expand-Archive -LiteralPath C:\temp\curl-7.54.0-win32-mingw.zip -DestinationPath C:\curl -Force
          (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/raw/fix/android-ci-header-pollution/.github/temp/bcc7764_bin_lib.zip', 'C:\temp\bcc7764_bin_lib.zip')
          Expand-Archive -LiteralPath C:\temp\bcc7764_bin_lib.zip -DestinationPath C:\bcc77 -Force
          (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/raw/fix/android-ci-header-pollution/.github/temp/bcc7764_include.zip', 'C:\temp\bcc7764_include.zip')
