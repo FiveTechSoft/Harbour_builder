@@ -40,7 +40,8 @@ jobs:
       run: |
         cd harbour
         set path=c:\bcc77\bin
-        set LIB=c:\bcc77\lib
+        set INCLUDE=c:\bcc77\Include;C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared;C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt
+        set LIB=c:\bcc77\lib;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\ucrt\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\um\x64
         set HB_BUILD_MODE=c
         set HB_USER_CFLAGS=
         set HB_USER_LDFLAGS=-L"c:\bcc77\lib" -L"c:\bcc77\lib\psdk"
