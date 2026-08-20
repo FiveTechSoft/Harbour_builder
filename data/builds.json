@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T04:29:59Z",
+  "generated_at": "2026-08-20T12:34:28Z",
   "upstream_sha": "a674457ce4509933f970f8db402a4d50fd3fdffb",
   "last_built_sha": "a674457ce4509933f970f8db402a4d50fd3fdffb",
   "just_dispatched": false,
@@ -38,14 +38,14 @@
     {
       "file": "harbour_darwin_osx_x86.yml",
       "run": {
-        "id": 31339244036,
-        "run_number": 5,
+        "id": 32337632663,
+        "run_number": 7,
         "status": "completed",
-        "conclusion": "cancelled",
-        "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/31339244036",
-        "updated_at": "2026-08-10T22:22:54Z",
-        "created_at": "2026-08-09T22:22:52Z",
-        "head_sha": "983cdcab88c9e1c3cdfefaa64b45d81b0ec7ed5f",
+        "conclusion": "success",
+        "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/32337632663",
+        "updated_at": "2026-08-20T06:02:13Z",
+        "created_at": "2026-08-20T05:57:58Z",
+        "head_sha": "356eb6fd87ec65317ec75580307173b992a3437e",
         "run_attempt": 1
       }
     },
@@ -178,14 +178,14 @@
     {
       "file": "harbour_android_ndk.yml",
       "run": {
-        "id": 31339251938,
-        "run_number": 5,
+        "id": 32333885203,
+        "run_number": 6,
         "status": "completed",
-        "conclusion": "failure",
-        "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/31339251938",
-        "updated_at": "2026-08-09T22:27:59Z",
-        "created_at": "2026-08-09T22:23:03Z",
-        "head_sha": "983cdcab88c9e1c3cdfefaa64b45d81b0ec7ed5f",
+        "conclusion": "success",
+        "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/32333885203",
+        "updated_at": "2026-08-20T05:07:29Z",
+        "created_at": "2026-08-20T04:59:21Z",
+        "head_sha": "aac86fec4759c81f33c7a61a2c84c21cc10957fc",
         "run_attempt": 1
       }
     },
