@@ -36,6 +36,9 @@ jobs:
         cd harbour
         make HB_BUILD_CONTRIBS="" HB_INSTALL_PREFIX="$GITHUB_WORKSPACE/host" install
 
+    - name: Hide host include dir (prevent cross-compilation header pollution)
+      run: sudo mv /usr/include /usr/include.host
+
     - name: Create NDK toolchain shims (Harbour expects ${prefix}gcc / ${prefix}ar ...)
       run: |
         API=24
