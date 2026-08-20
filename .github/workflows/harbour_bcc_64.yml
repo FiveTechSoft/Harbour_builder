@@ -52,6 +52,7 @@ jobs:
         set HB_STATIC_OPENSSL=yes
         set HB_STATIC_CURL=yes
         set HB_COMPILER=bcc64
+        set HB_BUILD_CONTRIBS=no
         SET HB_BUILD_CONTRIB_DYN=no
         SET HB_BUILD_DYN=no
         set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
