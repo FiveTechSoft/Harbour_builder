@@ -1,6 +1,7 @@
-"""Patch hbmk2.prg for BCC 7.7 (Clang-based) bcc64 support."""
+"""Patch hbmk2.prg AND config/win/bcc.mk for BCC 7.7 (Clang-based) bcc64 support."""
 import sys, os
 
+# --- Patch hbmk2.prg ---
 f = sys.argv[1] if len(sys.argv) > 1 else os.path.join("utils", "hbmk2", "hbmk2.prg")
 c = open(f, "r", encoding="utf-8").read()
 
@@ -62,9 +63,48 @@ for i, (old, new) in enumerate(patches):
     if old in c:
         c = c.replace(old, new, 1)
         count += 1
-        print(f"OK {i+1}")
+        print(f"hbmk2 OK {i+1}")
     else:
-        print(f"SKIP {i+1}: {old[:60]}...")
+        print(f"hbmk2 SKIP {i+1}")
 
 open(f, "w", encoding="utf-8").write(c)
-print(f"\nApplied {count}/{len(patches)} patches")
+print(f"hbmk2: {count}/{len(patches)} patches applied")
+
+# --- Patch config/win/bcc.mk ---
+f2 = os.path.join("config", "win", "bcc.mk")
+c2 = open(f2, "r", encoding="utf-8").read()
+
+bccmk_patches = [
+    # Fix CFLAGS line 25: skip -q -tWM -CP437 for bcc64
+    (
+        'CFLAGS += -q -tWM -CP437',
+        'ifneq ($(HB_COMPILER),bcc64)\nCFLAGS += -q -tWM -CP437\nendif',
+    ),
+    # Fix warning flags line 27-31: skip BCC32 warning flags for bcc64
+    (
+        'ifeq ($(HB_BUILD_WARN),no)\n   CFLAGS += -w-aus -w-ccc -w-csu -w-ovf -w-par -w-rch -w-spa\nelse\n   CFLAGS += -w -Q -w-sig\nendif',
+        'ifeq ($(HB_COMPILER),bcc64)\n   ifeq ($(HB_BUILD_WARN),no)\n      CFLAGS += -w\n   else\n      CFLAGS += -w\n   endif\nelse\n   ifeq ($(HB_BUILD_WARN),no)\n      CFLAGS += -w-aus -w-ccc -w-csu -w-ovf -w-par -w-rch -w-spa\n   else\n      CFLAGS += -w -Q -w-sig\n   endif\nendif',
+    ),
+    # Fix optimization flags: skip -d -OS -Ov -Oc for bcc64
+    (
+        '   ifeq ($(HB_COMPILER),bcc64)\n      CFLAGS += -d -O2 -OS -Ov -Oc\n   else',
+        '   ifeq ($(HB_COMPILER),bcc64)\n      CFLAGS += -O2\n   else',
+    ),
+    # Fix dynlib rule to use c0d64.o for bcc64
+    (
+        '   $(DY) $(DFLAGS) $(HB_USER_DFLAGS) c0d32.obj @__dyn__.tmp',
+        'ifeq ($(HB_COMPILER),bcc64)\n   $(DY) $(DFLAGS) $(HB_USER_DFLAGS) c0d64.o @__dyn__.tmp\nelse\n   $(DY) $(DFLAGS) $(HB_USER_DFLAGS) c0d32.obj @__dyn__.tmp\nendif',
+    ),
+]
+
+count2 = 0
+for i, (old, new) in enumerate(bccmk_patches):
+    if old in c2:
+        c2 = c2.replace(old, new, 1)
+        count2 += 1
+        print(f"bcc.mk OK {i+1}")
+    else:
+        print(f"bcc.mk SKIP {i+1}")
+
+open(f2, "w", encoding="utf-8").write(c2)
+print(f"bcc.mk: {count2}/{len(bccmk_patches)} patches applied")
