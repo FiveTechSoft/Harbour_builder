@@ -52,15 +52,10 @@ jobs:
         set HB_STATIC_OPENSSL=yes
         set HB_STATIC_CURL=yes
         set HB_COMPILER=bcc64
-        set HB_BUILD_CONTRIBS=no
         SET HB_BUILD_CONTRIB_DYN=no
         SET HB_BUILD_DYN=no
         set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
-        if exist "contrib\3rd\sqlite3" rmdir /s /q "contrib\3rd\sqlite3"
-        if exist "contrib\hbsqlit3" rmdir /s /q "contrib\hbsqlit3"
-        if exist "contrib\hbxdiff" rmdir /s /q "contrib\hbxdiff"
-        if exist "contrib\sddsqlt3" rmdir /s /q "contrib\sddsqlt3"
-        win-make.exe || exit /b 1
+        win-make.exe src || exit /b 1
         win-make.exe install || exit /b 1
 
     - name: Get current time
