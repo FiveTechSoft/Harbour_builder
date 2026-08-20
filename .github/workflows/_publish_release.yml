@@ -72,6 +72,7 @@ jobs:
           set -e
           workflows=(
             harbour_bcc_32.yml
+            harbour_bcc_64.yml
             harbour_darwin_osx.yml
             harbour_darwin_osx_x86.yml
             harbour_mingw_32.yml

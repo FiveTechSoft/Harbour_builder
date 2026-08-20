@@ -301,7 +301,7 @@
     <div class="container">
       <span class="hero-tag">CI/CD &middot; cross-platform Harbour</span>
       <h1>Fresh Harbour binaries,<br />every flavour, every hour.</h1>
-      <p>Automated GitHub Actions workflows poll <a href="https://github.com/FiveTechSoft/harbour">FiveTechSoft/harbour</a> hourly and compile for Windows (BCC, MinGW, MSVC), Linux (GCC) and macOS (Clang) whenever upstream moves. Pick your toolchain and download.</p>
+      <p>Automated GitHub Actions workflows poll <a href="https://github.com/FiveTechSoft/harbour">FiveTechSoft/harbour</a> hourly and compile for Windows (BCC 32/64, MinGW, MSVC), Linux (GCC) and macOS (Clang) whenever upstream moves. Pick your toolchain and download.</p>
 
       <div class="hero-meta" id="upstream-meta">
         <span class="dot" id="freshness-dot"></span>
@@ -389,6 +389,7 @@
     { id: "harbour_msvc_64.yml",  title: "MSVC 64",  os: "windows", icon: "V64", platform: "win64-msvc" },
     { id: "harbour_msvc_32.yml",  title: "MSVC 32",  os: "windows", icon: "V32", platform: "win32-msvc" },
     { id: "harbour_bcc_32.yml",   title: "BCC 32",   os: "windows", icon: "B32", platform: "win32-bcc" },
+    { id: "harbour_bcc_64.yml",   title: "BCC 64",   os: "windows", icon: "B64", platform: "win64-bcc" },
     { id: "harbour_win64_msvc.yml",     title: "MSVC 64 (vcpkg)", os: "windows", icon: "VCP", platform: "win64-msvc-vcpkg" },
     { id: "harbour_win64_ADS_msvc.yml", title: "MSVC 64 + ADS",   os: "windows", icon: "ADS", platform: "win64-msvc-ads" },
     { id: "harbour_win_arm_msvc.yml",   title: "MSVC ARM64",      os: "windows", icon: "A64", platform: "win-arm64-msvc" },

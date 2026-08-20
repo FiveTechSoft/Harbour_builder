@@ -1,0 +1,139 @@
+name: Harbour for Windows 64 using BCC
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+
+    steps:
+    - name: Checkout FiveTechSoft/harbour repo
+      uses: actions/checkout@v4
+      with:
+       repository: FiveTechSoft/harbour
+       path: harbour
+
+    - name: Install dependencies
+      run: |
+         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/OpenSSL-Win64.zip', 'C:\temp\OpenSSL-Win64.zip')
+         Expand-Archive -LiteralPath C:\temp\OpenSSL-Win64.zip -DestinationPath C:\OpenSSL -Force
+         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/curl-7.54.0-win64-mingw.zip', 'C:\temp\curl-7.54.0-win64-mingw.zip')
+         Expand-Archive -LiteralPath C:\temp\curl-7.54.0-win64-mingw.zip -DestinationPath C:\curl -Force
+         (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/raw/master/.github/temp/bcc7764_bin_lib.zip', 'C:\temp\bcc7764_bin_lib.zip')
+         Expand-Archive -LiteralPath C:\temp\bcc7764_bin_lib.zip -DestinationPath C:\bcc77 -Force
+         (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/raw/master/.github/temp/bcc7764_include.zip', 'C:\temp\bcc7764_include.zip')
+         Expand-Archive -LiteralPath C:\temp\bcc7764_include.zip -DestinationPath C:\bcc77 -Force
+
+    - name: Patch sources for BCC64
+      shell: pwsh
+      run: |
+        cd harbour
+        $makeHb = Join-Path $PWD 'contrib\make.hb'
+        $content = [System.IO.File]::ReadAllText($makeHb, [System.Text.Encoding]::UTF8)
+        $content = $content.Replace(' -quiet ', ' ')
+        [System.IO.File]::WriteAllText($makeHb, $content, [System.Text.Encoding]::UTF8)
+        Write-Host "Patched make.hb: removed -quiet"
+        $hbp = Join-Path $PWD 'contrib\hbssl\hbssl.hbp'
+        $hbpContent = [System.IO.File]::ReadAllText($hbp, [System.Text.Encoding]::UTF8)
+        $hbpContent = $hbpContent.Replace('-iflag={bcc}-a', '-iflag={bcc}-a -iflag={bcc}-w-8065')
+        [System.IO.File]::WriteAllText($hbp, $hbpContent, [System.Text.Encoding]::UTF8)
+        Write-Host "Patched hbssl.hbp: added -w-8065"
+        $bccCfg = 'C:\bcc77\bin\bcc64.cfg'
+        if (Test-Path $bccCfg) {
+          $cfgContent = [System.IO.File]::ReadAllText($bccCfg, [System.Text.Encoding]::ASCII)
+          if ($cfgContent -notmatch 'w-8065') {
+            $cfgContent = $cfgContent.TrimEnd() + "`n-w-8065`n-w-8045`n-w-8080`n-w-8056`n"
+            [System.IO.File]::WriteAllText($bccCfg, $cfgContent, [System.Text.Encoding]::ASCII)
+          }
+        } else {
+          [System.IO.File]::WriteAllText($bccCfg, "-w-8065`n-w-8045`n-w-8080`n-w-8056`n", [System.Text.Encoding]::ASCII)
+        }
+        Write-Host "Created bcc64.cfg with -w-8065"
+        $evp = Join-Path $PWD 'contrib\hbssl\evppkey.c'
+        $evpContent = [System.IO.File]::ReadAllText($evp, [System.Text.Encoding]::UTF8)
+        $evpContent = "#pragma warn -8065`n#pragma warn -8045`n" + $evpContent
+        [System.IO.File]::WriteAllText($evp, $evpContent, [System.Text.Encoding]::UTF8)
+        Write-Host "Patched evppkey.c: added #pragma warn -8065"
+        Get-ChildItem 'contrib\hbhpdf\3rd\libhpdf\hpdfenc*.c' | ForEach-Object {
+          $fc = [System.IO.File]::ReadAllText($_.FullName, [System.Text.Encoding]::UTF8)
+          if (-not $fc.StartsWith('#pragma')) {
+            [System.IO.File]::WriteAllText($_.FullName, "#pragma warn -8080`n" + $fc, [System.Text.Encoding]::UTF8)
+          }
+        }
+        Get-ChildItem 'contrib\hbhpdf\3rd\libhpdf\hpdffdf*.c' | ForEach-Object {
+          $fc = [System.IO.File]::ReadAllText($_.FullName, [System.Text.Encoding]::UTF8)
+          if (-not $fc.StartsWith('#pragma')) {
+            [System.IO.File]::WriteAllText($_.FullName, "#pragma warn -8080`n" + $fc, [System.Text.Encoding]::UTF8)
+          }
+        }
+        Get-ChildItem 'contrib\hbhpdf\3rd\libhpdf\hpdfpags.c' | ForEach-Object {
+          $fc = [System.IO.File]::ReadAllText($_.FullName, [System.Text.Encoding]::UTF8)
+          if (-not $fc.StartsWith('#pragma')) {
+            [System.IO.File]::WriteAllText($_.FullName, "#pragma warn -8080`n" + $fc, [System.Text.Encoding]::UTF8)
+          }
+        }
+        Write-Host "Patched hbhpdf font files: added #pragma warn -8080"
+        $tinymt = Join-Path $PWD 'contrib\hbtinymt\3rd\tinymt\tinymt64.h'
+        if (Test-Path $tinymt) {
+          $tc = [System.IO.File]::ReadAllText($tinymt, [System.Text.Encoding]::UTF8)
+          [System.IO.File]::WriteAllText($tinymt, "#pragma warn -8056`n" + $tc, [System.Text.Encoding]::UTF8)
+          Write-Host "Patched tinymt64.h: added #pragma warn -8056"
+        Get-ChildItem 'contrib' -Directory | ForEach-Object { Get-ChildItem $_.FullName -Filter '*.c' -Recurse -File -ErrorAction SilentlyContinue } | ForEach-Object {
+          $fc = [System.IO.File]::ReadAllText($_.FullName, [System.Text.Encoding]::UTF8)
+          if (-not $fc.StartsWith('#pragma')) {
+            [System.IO.File]::WriteAllText($_.FullName, "#pragma warn -8065`n#pragma warn -8045`n#pragma warn -8056`n#pragma warn -8080`n" + $fc, [System.Text.Encoding]::UTF8)
+          }
+        }
+        Write-Host "Added pragmas to all contrib .c files"
+        }
+        Write-Host "Verifying make.hb content around line 567:"
+        $lines = [System.IO.File]::ReadAllLines($makeHb, [System.Text.Encoding]::UTF8)
+        for ($i = 565; $i -lt 570 -and $i -lt $lines.Length; $i++) {
+          Write-Host "  Line $($i+1): $($lines[$i])"
+        }
+
+    - name: Compile and install Harbour
+      shell: cmd
+      run: |
+        cd harbour
+        set path=c:\bcc77\bin
+        set LIB=c:\bcc77\lib
+        set HB_BUILD_MODE=c
+        set HB_USER_CFLAGS=-w-8065 -w-8045 -w-8080 -w-8056
+        set HB_USER_LDFLAGS=-L"c:\bcc77\lib" -L"c:\bcc77\lib\psdk"
+        set HB_USER_PRGFLAGS=-l-
+        set HB_BUILD_CONTRIBS=
+        set HB_WITH_OPENSSL=C:\OpenSSL\include
+        set HB_WITH_CURL=C:\curl\include
+        set HB_STATIC_OPENSSL=yes
+        set HB_STATIC_CURL=yes
+        set HB_COMPILER=bcc
+        SET HB_BUILD_CONTRIB_DYN=no
+        SET HB_BUILD_DYN=no
+        set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
+        if exist "contrib\3rd\sqlite3" rmdir /s /q "contrib\3rd\sqlite3"
+        if exist "contrib\hbsqlit3" rmdir /s /q "contrib\hbsqlit3"
+        if exist "contrib\hbxdiff" rmdir /s /q "contrib\hbxdiff"
+        if exist "contrib\sddsqlt3" rmdir /s /q "contrib\sddsqlt3"
+        win-make.exe || exit /b 1
+        win-make.exe install || exit /b 1
+
+    - name: Get current time
+      id: current-time
+      shell: pwsh
+      run: |
+        $time = Get-Date -Format "yyyyMMdd"
+        "formattedTime=$time" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+    - name: Upload Harbour to artifact
+      env:
+       TIME: "${{ steps.current-time.outputs.formattedTime }}"
+      uses: actions/upload-artifact@v4
+      with:
+       name: harbour_win64_bcc_${{ env.TIME }}
+       path: output
