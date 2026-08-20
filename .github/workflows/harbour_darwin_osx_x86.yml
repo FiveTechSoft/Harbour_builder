@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: macos-13   # Intel (x86_64)
+    runs-on: macos-15-large   # Intel (x86_64)
 
 
     steps:
