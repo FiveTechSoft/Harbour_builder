@@ -71,7 +71,8 @@ open(f, "w", encoding="utf-8").write(c)
 print(f"hbmk2: {count}/{len(patches)} patches applied")
 
 # --- Patch config/win/bcc.mk ---
-f2 = os.path.join("config", "win", "bcc.mk")
+base = os.path.dirname(os.path.dirname(os.path.dirname(f)))  # utils/hbmk2/hbmk2.prg -> harbour root
+f2 = os.path.join(base, "config", "win", "bcc.mk")
 c2 = open(f2, "r", encoding="utf-8").read()
 
 bccmk_patches = [
