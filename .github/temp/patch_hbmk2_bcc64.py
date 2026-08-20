@@ -96,6 +96,11 @@ bccmk_patches = [
         '   $(DY) $(DFLAGS) $(HB_USER_DFLAGS) c0d32.obj @__dyn__.tmp',
         'ifeq ($(HB_COMPILER),bcc64)\n   $(DY) $(DFLAGS) $(HB_USER_DFLAGS) c0d64.o @__dyn__.tmp\nelse\n   $(DY) $(DFLAGS) $(HB_USER_DFLAGS) c0d32.obj @__dyn__.tmp\nendif',
     ),
+    # Fix LD_RULE startup object: c0x64.obj -> c0x64.o (BCC77 zip ships .o)
+    (
+        'c0x64.obj',
+        'c0x64.o',
+    ),
 ]
 
 count2 = 0
