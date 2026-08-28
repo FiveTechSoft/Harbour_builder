@@ -56,6 +56,7 @@ jobs:
         set HB_USER_CFLAGS=--target=i686-pc-windows-msvc
         set HB_USER_LDFLAGS=--target=i686-pc-windows-msvc
         set HB_USER_DFLAGS=--target=i686-pc-windows-msvc
+        set HB_USER_RESFLAGS=--target=pe-i386
         set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
         win-make.exe HB_CPU=x86 || exit /b 1
         win-make.exe HB_CPU=x86 install || exit /b 1
