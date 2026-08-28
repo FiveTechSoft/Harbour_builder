@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-28T08:30:23Z",
+  "generated_at": "2026-08-28T20:35:36Z",
   "upstream_sha": "a674457ce4509933f970f8db402a4d50fd3fdffb",
   "last_built_sha": "a674457ce4509933f970f8db402a4d50fd3fdffb",
   "just_dispatched": false,
   "repo_stars": 43,
-  "total_downloads": 128,
+  "total_downloads": 131,
   "releases_count": 1,
   "workflows": [
     {
@@ -32,6 +32,34 @@
         "updated_at": "2026-08-20T12:48:23Z",
         "created_at": "2026-08-20T12:45:03Z",
         "head_sha": "97ec94c73b6c63d817a4d73de3710cad63a41abe",
+        "run_attempt": 1
+      }
+    },
+    {
+      "file": "harbour_clang_32.yml",
+      "run": {
+        "id": 33192839252,
+        "run_number": 2,
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/33192839252",
+        "updated_at": "2026-08-28T17:21:07Z",
+        "created_at": "2026-08-28T17:02:48Z",
+        "head_sha": "85962af04ac2367d04f8f92d01d0118cf5d2af45",
+        "run_attempt": 1
+      }
+    },
+    {
+      "file": "harbour_clang_64.yml",
+      "run": {
+        "id": 33191593034,
+        "run_number": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/33191593034",
+        "updated_at": "2026-08-28T17:04:20Z",
+        "created_at": "2026-08-28T16:46:57Z",
+        "head_sha": "5b1c82c17903f0a33821f3b80ea616a6fee5487e",
         "run_attempt": 1
       }
     },
