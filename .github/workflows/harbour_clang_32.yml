@@ -1,0 +1,76 @@
+name: Harbour for Windows 32 using clang
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Checkout FiveTechSoft/harbour repo
+      uses: actions/checkout@v4
+      with:
+       repository: FiveTechSoft/harbour
+       path: harbour
+
+    - name: Install dependencies
+      run: |
+         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/OpenSSL-Win32.zip', 'C:\temp\OpenSSL-Win32.zip')
+         Expand-Archive -LiteralPath C:\temp\OpenSSL-Win32.zip -DestinationPath C:\OpenSSL -Force
+         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/curl-7.54.0-win32-mingw.zip', 'C:\temp\curl-7.54.0-win32-mingw.zip')
+         Expand-Archive -LiteralPath C:\temp\curl-7.54.0-win32-mingw.zip -DestinationPath C:\curl -Force
+
+    - name: Locate LLVM/clang
+      shell: pwsh
+      run: |
+        $llvm = 'C:\Program Files\LLVM\bin'
+        if (-not (Get-Command clang -ErrorAction SilentlyContinue)) {
+          if (Test-Path "$llvm\clang.exe") { "$llvm" | Out-File -FilePath $env:GITHUB_PATH -Append }
+          else { throw "clang not found in PATH nor in $llvm" }
+        }
+
+    - name: Setup MSVC environment (x86)
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x86
+
+    - name: Compile and install Harbour
+      shell: cmd
+      run: |
+        cd harbour
+        set HB_BUILD_MODE=c
+        set HB_USER_PRGFLAGS=-l-
+        set HB_BUILD_CONTRIBS=
+        set HB_WITH_OPENSSL=C:\OpenSSL\include
+        set HB_WITH_CURL=C:\curl\include
+        set HB_STATIC_OPENSSL=yes
+        set HB_STATIC_CURL=yes
+        set HB_COMPILER=clang
+        set HB_USER_CFLAGS=--target=i686-pc-windows-msvc
+        set HB_USER_LDFLAGS=--target=i686-pc-windows-msvc
+        set HB_USER_DFLAGS=--target=i686-pc-windows-msvc
+        set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
+        win-make.exe HB_CPU=x86 || exit /b 1
+        win-make.exe HB_CPU=x86 install || exit /b 1
+
+    - name: Get current time
+      id: current-time
+      shell: pwsh
+      run: |
+        $time = Get-Date -Format "yyyy_MM_dd"
+        "formattedTime=$time" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+    - name: Upload Harbour to artifact
+      env:
+         TIME: "${{ steps.current-time.outputs.formattedTime }}"
+      uses: actions/upload-artifact@v4
+      with:
+       name: harbour_win32_clang_${{ env.TIME }}
+       path: output
