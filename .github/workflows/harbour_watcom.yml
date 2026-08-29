@@ -1,0 +1,74 @@
+name: Harbour for Windows 32 using Open Watcom
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+    - name: Checkout FiveTechSoft/harbour repo
+      uses: actions/checkout@v4
+      with:
+       repository: FiveTechSoft/harbour
+       path: harbour
+
+    - name: Install Open Watcom V2
+      shell: pwsh
+      run: |
+        $ProgressPreference = 'SilentlyContinue'
+        (new-object System.Net.WebClient).DownloadFile('https://github.com/open-watcom/open-watcom-v2/releases/download/Current-build/open-watcom-2_0-c-win-x64.exe', 'C:\temp\ow2-setup.exe')
+        Start-Process -FilePath 'C:\temp\ow2-setup.exe' -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/SP-','/LOG=C:\temp\ow2_install.log','/DIR=C:\WATCOM' -Wait
+        if (-not (Test-Path 'C:\WATCOM\binnt\wcc386.exe') -and -not (Test-Path 'C:\WATCOM\binnt64\wcc386.exe')) {
+          if (Test-Path 'C:\temp\ow2_install.log') { Write-Host "--- ow2 install log ---"; Get-Content C:\temp\ow2_install.log -Tail 40 }
+          throw "Open Watcom V2 install failed: wcc386.exe not found"
+        }
+        Write-Host "Open Watcom V2 installed:"
+        Get-ChildItem C:\WATCOM\binnt\wcc386.exe,C:\WATCOM\binnt64\wcc386.exe,C:\WATCOM\binnt\wlink.exe,C:\WATCOM\binnt\wlib.exe -ErrorAction SilentlyContinue | ForEach-Object { Write-Host ("  " + $_.FullName) }
+
+    - name: Compile and install Harbour
+      shell: cmd
+      run: |
+        cd harbour
+        set WATCOM=C:\WATCOM
+        set PATH=C:\WATCOM\binnt64;C:\WATCOM\binnt;%PATH%
+        set INCLUDE=C:\WATCOM\h;C:\WATCOM\h\nt
+        set EDPATH=C:\WATCOM\eddat
+        set WIPFC=C:\WATCOM\wipfc
+        set HB_BUILD_MODE=c
+        set HB_USER_PRGFLAGS=-l-
+        set HB_BUILD_CONTRIBS=
+        set HB_COMPILER=watcom
+        set HB_PLATFORM=win
+        SET HB_BUILD_CONTRIB_DYN=no
+        SET HB_BUILD_DYN=no
+        set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
+        win-make.exe src || exit /b 1
+        win-make.exe -C src install || exit /b 1
+
+    - name: Verify build
+      shell: pwsh
+      run: |
+        $harbour = Get-ChildItem "$env:GITHUB_WORKSPACE\output" -Recurse -Filter "harbour.exe" | Select-Object -First 1
+        if (-not $harbour) { throw "harbour.exe not found in installed tree" }
+        Write-Host "OK: $($harbour.FullName)"
+        & $harbour.FullName -build
+
+    - name: Get current time
+      id: current-time
+      shell: pwsh
+      run: |
+        $time = Get-Date -Format "yyyyMMdd"
+        "formattedTime=$time" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+    - name: Upload Harbour to artifact
+      env:
+       TIME: "${{ steps.current-time.outputs.formattedTime }}"
+      uses: actions/upload-artifact@v4
+      with:
+       name: harbour_win32_watcom_${{ env.TIME }}
+       path: output

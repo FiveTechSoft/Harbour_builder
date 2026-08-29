@@ -83,6 +83,7 @@ jobs:
             harbour_mingw_64.yml
             harbour_msvc_32.yml
             harbour_msvc_64.yml
+            harbour_watcom.yml
             harbour_ubuntu_64.yml
             harbour_ubuntu_arm64.yml
             harbour_win64_ADS_msvc.yml
