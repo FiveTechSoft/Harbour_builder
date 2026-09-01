@@ -8,7 +8,7 @@ permissions:
 
 env:
   ZIG_VERSION: 0.16.0
-  ZIG_SHA256: 68659eb5f1e4eb1437a722f1dd889c5a322c9954607f5edcf337bc3684a75a7e
+  ZIG_SHA256: 8aee7e8a8deb998ba96cb95d89aa5fcdf32933fdc67de51d280d9e4d7396f1a0
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
       shell: pwsh
       run: |
         $archive = Join-Path $env:RUNNER_TEMP "zig-$env:ZIG_VERSION.zip"
-        $download = "https://ziglang.org/download/$env:ZIG_VERSION/zig-x86_64-windows-$env:ZIG_VERSION.zip"
+        $download = "https://ziglang.org/download/$env:ZIG_VERSION/zig-x86-windows-$env:ZIG_VERSION.zip"
         Invoke-WebRequest -Uri $download -OutFile $archive
 
         $actualHash = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant()
