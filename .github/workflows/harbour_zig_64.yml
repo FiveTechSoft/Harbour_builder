@@ -1,0 +1,88 @@
+name: Harbour for Windows 64 using Zig
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  ZIG_VERSION: 0.16.0
+  ZIG_SHA256: 68659eb5f1e4eb1437a722f1dd889c5a322c9954607f5edcf337bc3684a75a7e
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+    - name: Checkout FiveTechSoft/harbour repo
+      uses: actions/checkout@v4
+      with:
+       repository: FiveTechSoft/harbour
+       path: harbour
+
+    - name: Install Zig
+      shell: pwsh
+      run: |
+        $archive = Join-Path $env:RUNNER_TEMP "zig-$env:ZIG_VERSION.zip"
+        $download = "https://ziglang.org/download/$env:ZIG_VERSION/zig-x86_64-windows-$env:ZIG_VERSION.zip"
+        Invoke-WebRequest -Uri $download -OutFile $archive
+
+        $actualHash = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+        if ($actualHash -ne $env:ZIG_SHA256) {
+          throw "Zig archive checksum mismatch: expected $env:ZIG_SHA256, got $actualHash"
+        }
+
+        $extractRoot = Join-Path $env:RUNNER_TEMP 'zig'
+        Expand-Archive -LiteralPath $archive -DestinationPath $extractRoot -Force
+        $zigRoot = (Get-ChildItem -LiteralPath $extractRoot -Directory | Select-Object -First 1).FullName
+        $zigRoot | Out-File -FilePath $env:GITHUB_PATH -Append
+        & (Join-Path $zigRoot 'zig.exe') version
+
+    - name: Install dependencies
+      shell: cmd
+      run: |
+        vcpkg install openssl:x64-windows curl:x64-windows --x-install-root="%GITHUB_WORKSPACE%\vcpkg_installed"
+
+    - name: Compile and install Harbour
+      shell: cmd
+      run: |
+        cd harbour
+        set HB_BUILD_MODE=c
+        set HB_USER_PRGFLAGS=-l-
+        set HB_BUILD_CONTRIBS=
+        set HB_WITH_OPENSSL=%GITHUB_WORKSPACE%\vcpkg_installed\x64-windows\include
+        set HB_WITH_CURL=%GITHUB_WORKSPACE%\vcpkg_installed\x64-windows\include
+        set HB_STATIC_OPENSSL=yes
+        set HB_STATIC_CURL=yes
+        set HB_COMPILER=zig
+        set HB_CPU=x86_64
+        set HB_ZIG_TARGET=x86_64-windows-gnu
+        set HB_BUILD_CONTRIB_DYN=no
+        set HB_BUILD_DYN=no
+        set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
+        win-make.exe -j2 || exit /b 1
+        win-make.exe -j2 install || exit /b 1
+
+    - name: Verify installed toolchain
+      shell: pwsh
+      run: |
+        & "$env:GITHUB_WORKSPACE\output\bin\harbour.exe" -build
+        if ($LASTEXITCODE -ne 0) { throw 'harbour.exe -build failed' }
+        & "$env:GITHUB_WORKSPACE\output\bin\hbmk2.exe" -version
+        if ($LASTEXITCODE -ne 0) { throw 'hbmk2.exe -version failed' }
+
+    - name: Get current time
+      id: current-time
+      shell: pwsh
+      run: |
+        $time = Get-Date -Format "yyyy_MM_dd"
+        "formattedTime=$time" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+    - name: Upload Harbour to artifact
+      env:
+         TIME: "${{ steps.current-time.outputs.formattedTime }}"
+      uses: actions/upload-artifact@v4
+      with:
+       name: harbour_win64_zig_${{ env.TIME }}
+       path: output

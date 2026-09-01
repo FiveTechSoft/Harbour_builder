@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Harbour Builder &mdash; Cross-platform Harbour binaries</title>
-  <meta name="description" content="Automated builds of Harbour for every flavour: MinGW, MSVC, BCC, GCC (Linux), Clang (macOS). Fresh binaries from the latest FiveTechSoft/harbour sources." />
+  <meta name="description" content="Automated builds of Harbour for every flavour: MinGW, MSVC, BCC, Zig, GCC (Linux), Clang (macOS). Fresh binaries from the latest FiveTechSoft/harbour sources." />
   <meta property="og:title" content="Harbour Builder" />
   <meta property="og:description" content="Automated cross-platform Harbour binaries built from FiveTechSoft/harbour." />
   <meta property="og:type" content="website" />
@@ -301,7 +301,7 @@
     <div class="container">
       <span class="hero-tag">CI/CD &middot; cross-platform Harbour</span>
       <h1>Fresh Harbour binaries,<br />every flavour, every hour.</h1>
-      <p>Automated GitHub Actions workflows poll <a href="https://github.com/FiveTechSoft/harbour">FiveTechSoft/harbour</a> hourly and compile for Windows (BCC 32/64, MinGW, MSVC, Open Watcom), Linux (GCC) and macOS (Clang) whenever upstream moves. Pick your toolchain and download.</p>
+      <p>Automated GitHub Actions workflows poll <a href="https://github.com/FiveTechSoft/harbour">FiveTechSoft/harbour</a> hourly and compile for Windows (BCC 32/64, MinGW, MSVC, Zig, Open Watcom), Linux (GCC) and macOS (Clang) whenever upstream moves. Pick your toolchain and download.</p>
 
       <div class="hero-meta" id="upstream-meta">
         <span class="dot" id="freshness-dot"></span>
@@ -356,7 +356,7 @@
       <ol style="color: var(--text-dim); line-height: 1.8;">
         <li>Cron fires <code>_watch_harbour_core.yml</code> every hour, on the hour (UTC).</li>
         <li>It compares <code>FiveTechSoft/harbour</code>'s HEAD SHA against the value tracked in <code>.github/last_core_sha.txt</code>.</li>
-        <li>If the SHA changed, all 19 build workflows are triggered via <code>gh workflow run</code>.</li>
+        <li>If the SHA changed, all 21 build workflows are triggered via <code>gh workflow run</code>.</li>
         <li>Each workflow installs its tree (binaries + libs + headers + contribs) to <code>HB_INSTALL_PREFIX</code> and uploads it as a GitHub Actions artifact.</li>
         <li>The new SHA is committed back to track what was last built.</li>
         <li>When the last build of the batch finishes, <code>_publish_release.yml</code> bundles the artifacts into a tagged GitHub Release named <code>core-&lt;sha7&gt;</code>.</li>
@@ -390,6 +390,8 @@
     { id: "harbour_msvc_32.yml",  title: "MSVC 32",  os: "windows", icon: "V32", platform: "win32-msvc" },
     { id: "harbour_clang_64.yml", title: "clang 64", os: "windows", icon: "C64", platform: "win64-clang" },
     { id: "harbour_clang_32.yml", title: "clang 32", os: "windows", icon: "C32", platform: "win32-clang" },
+    { id: "harbour_zig_64.yml",   title: "Zig 64",   os: "windows", icon: "Z64", platform: "win64-zig" },
+    { id: "harbour_zig_32.yml",   title: "Zig 32",   os: "windows", icon: "Z32", platform: "win32-zig" },
     { id: "harbour_bcc_32.yml",   title: "BCC 32",   os: "windows", icon: "B32", platform: "win32-bcc" },
     { id: "harbour_bcc_64.yml",   title: "BCC 64",   os: "windows", icon: "B64", platform: "win64-bcc" },
     { id: "harbour_watcom.yml",   title: "Open Watcom 32", os: "windows", icon: "W32", platform: "win32-watcom" },
