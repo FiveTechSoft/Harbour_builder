@@ -74,6 +74,8 @@ jobs:
             harbour_bcc_64.yml
             harbour_clang_32.yml
             harbour_clang_64.yml
+            harbour_zig_32.yml
+            harbour_zig_64.yml
             harbour_darwin_osx.yml
             harbour_darwin_osx_x86.yml
             harbour_mingw_32.yml
@@ -107,6 +109,8 @@ jobs:
             harbour_bcc_64.yml
             harbour_clang_32.yml
             harbour_clang_64.yml
+            harbour_zig_32.yml
+            harbour_zig_64.yml
             harbour_darwin_osx.yml
             harbour_darwin_osx_x86.yml
             harbour_mingw_32.yml

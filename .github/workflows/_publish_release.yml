@@ -6,6 +6,8 @@ on:
       - Harbour for Windows 32 using BCC
       - Harbour for Windows 32 using clang
       - Harbour for Windows 64 using clang
+      - Harbour for Windows 32 using Zig
+      - Harbour for Windows 64 using Zig
       - Harbour for Apple Darwin
       - Harbour for Apple Darwin x86_64
       - Harbour for Windows 32 using MinGW
@@ -77,6 +79,8 @@ jobs:
             harbour_bcc_64.yml
             harbour_clang_32.yml
             harbour_clang_64.yml
+            harbour_zig_32.yml
+            harbour_zig_64.yml
             harbour_darwin_osx.yml
             harbour_darwin_osx_x86.yml
             harbour_mingw_32.yml
