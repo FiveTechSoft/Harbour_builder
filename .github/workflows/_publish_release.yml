@@ -21,6 +21,10 @@ on:
       - Harbour for Win64 using msvc
     types: [completed]
   workflow_dispatch:
+  # Runs dispatched by the watcher (GITHUB_TOKEN) do not fire workflow_run,
+  # so also check every 6 hours; it skips if the release already exists.
+  schedule:
+    - cron: '0 */6 * * *'
 
 permissions:
   contents: write
