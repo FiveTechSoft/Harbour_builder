@@ -129,11 +129,15 @@ jobs:
           )
           runs_json=$(jq -n '[]')
           for wf in "${workflows[@]}"; do
+            # A workflow with no runs, a missing file (404) or an API hiccup must
+            # not break the snapshot: anything that is not one valid JSON value -> null.
             run=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$wf/runs?per_page=1" \
-                   --jq '.workflow_runs[0] // null' 2>/dev/null || echo 'null')
-            slim=$(echo "$run" | jq '. | if . == null then null else
+                   --jq '.workflow_runs[0] // null' 2>/dev/null) || run=null
+            echo "$run" | jq -e -s 'length == 1' >/dev/null 2>&1 || run=null
+            slim=$(echo "$run" | jq -c '. | if (type != "object") or (has("id") | not) then null else
               {id, run_number, status, conclusion, html_url, updated_at, created_at,
-               head_sha, run_attempt} end')
+               head_sha, run_attempt} end' 2>/dev/null) || slim=null
+            slim=${slim:-null}
             runs_json=$(echo "$runs_json" | jq --arg wf "$wf" --argjson r "$slim" \
               '. + [{file:$wf, run:$r}]')
           done
@@ -153,9 +157,13 @@ jobs:
           # Anonymous Releases page asset clicks all hit this counter, so it is the
           # honest 'how many people pulled a build' number. Returns 0 when there
           # are no releases yet.
+          # --paginate runs --jq once per page, so sum/count across pages here.
           total_downloads=$(gh api --paginate "repos/$GITHUB_REPOSITORY/releases" \
-            --jq '[.[].assets[]? | .download_count] | add // 0')
-          releases_count=$(gh api --paginate "repos/$GITHUB_REPOSITORY/releases" --jq 'length')
+            --jq '.[].assets[]? | .download_count' | awk '{s+=$1} END {print s+0}')
+          releases_count=$(gh api --paginate "repos/$GITHUB_REPOSITORY/releases" \
+            --jq '.[].id' | wc -l | tr -d ' ')
+          commits_json=${commits_json:-[]}
+          repo_stars=${repo_stars:-0}
           jq -n \
             --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             --arg up "${{ steps.core.outputs.sha }}" \
