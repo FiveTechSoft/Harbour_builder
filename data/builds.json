@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-01T05:57:52Z",
+  "generated_at": "2026-09-24T00:14:19Z",
   "upstream_sha": "9d4fbe98b143a0db7bb8082f76ad5013cce459ff",
   "last_built_sha": "9d4fbe98b143a0db7bb8082f76ad5013cce459ff",
   "just_dispatched": false,
   "repo_stars": 44,
-  "total_downloads": 136,
-  "releases_count": 1,
+  "total_downloads": 159,
+  "releases_count": 2,
   "workflows": [
     {
       "file": "harbour_bcc_32.yml",
@@ -60,6 +60,34 @@
         "updated_at": "2026-08-29T21:47:11Z",
         "created_at": "2026-08-29T21:28:47Z",
         "head_sha": "8660573049c2f9ac9f555e91d8d4bdbc938e861c",
+        "run_attempt": 1
+      }
+    },
+    {
+      "file": "harbour_zig_32.yml",
+      "run": {
+        "id": 35931951482,
+        "run_number": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/35931951482",
+        "updated_at": "2026-09-23T23:22:23Z",
+        "created_at": "2026-09-23T23:07:09Z",
+        "head_sha": "42ede61e8f2ca085959cb696738f10b868299e8d",
+        "run_attempt": 1
+      }
+    },
+    {
+      "file": "harbour_zig_64.yml",
+      "run": {
+        "id": 35932004405,
+        "run_number": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/35932004405",
+        "updated_at": "2026-09-23T23:18:41Z",
+        "created_at": "2026-09-23T23:07:45Z",
+        "head_sha": "42ede61e8f2ca085959cb696738f10b868299e8d",
         "run_attempt": 1
       }
     },
