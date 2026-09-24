@@ -54,7 +54,7 @@ jobs:
       shell: cmd
       run: |
         cd harbour
-        set path=c:\bcc32\bin;%SystemRoot%\system32
+        set path=c:\bcc32\bin
         set LIB=c:\bcc32\lib
         set HB_BUILD_MODE=c
         set HB_USER_CFLAGS=-w-sig -w-8071 -w-8084 -w-8065
@@ -64,7 +64,7 @@ jobs:
         set HB_BUILD_CONTRIBS=no
         set HB_BUILD_DYN=no
         set HB_COMPILER=bcc
-        win-make.exe || exit /b 1
+        win-make.exe || ( if exist bin\win\bcc\hbpp.exe tdump -em bin\win\bcc\hbpp.exe & exit /b 1 )
         if not exist bin\win\bcc\hbmk2.exe ( echo host hbmk2.exe missing & exit /b 1 )
         bin\win\bcc\hbmk2.exe --version
 
