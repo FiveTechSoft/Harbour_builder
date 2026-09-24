@@ -2,6 +2,15 @@ name: Harbour for Windows 64 using BCC
 
 on:
   workflow_dispatch:
+    inputs:
+      harbour_ref:
+        description: FiveTechSoft/harbour commit to build (empty = master)
+        required: false
+        default: ''
+      release_tag:
+        description: Existing release whose harbour_win64_bcc_* asset should be replaced with this build (empty = none)
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -16,6 +25,7 @@ jobs:
       uses: actions/checkout@v4
       with:
        repository: FiveTechSoft/harbour
+       ref: ${{ inputs.harbour_ref }}
        path: harbour
 
     - name: Install dependencies
@@ -28,12 +38,35 @@ jobs:
          Expand-Archive -LiteralPath C:\temp\bcc7764_bin_lib.zip -DestinationPath C:\bcc77 -Force
          (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/raw/master/.github/temp/bcc7764_include.zip', 'C:\temp\bcc7764_include.zip')
          Expand-Archive -LiteralPath C:\temp\bcc7764_include.zip -DestinationPath C:\bcc77 -Force
+         # BCC 32 only to build the native host tools (harbour.exe/hbmk2.exe) used to build the contribs,
+         # because hbmk2 built with bcc64 stops at startup (error 9994, CP init failure)
+         (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/raw/master/.github/temp/bcc77.zip', 'C:\temp\bcc77.zip')
+         Expand-Archive -LiteralPath C:\temp\bcc77.zip -DestinationPath C:\bcc32 -Force
+         Add-Content C:\bcc32\bin\bcc32.cfg "`n-w-8065`n-w-8045`n-w-8080`n-w-8056`n"
 
     - name: Patch sources for BCC64
       shell: pwsh
       run: |
         (new-object System.Net.WebClient).DownloadFile('https://github.com/FiveTechSoft/Harbour_builder/raw/master/.github/temp/patch_hbmk2_bcc64.py', 'C:\temp\patch_hbmk2_bcc64.py')
         python C:\temp\patch_hbmk2_bcc64.py harbour\utils\hbmk2\hbmk2.prg
+
+    - name: Build native host tools (BCC 32, no contribs)
+      shell: cmd
+      run: |
+        cd harbour
+        set path=c:\bcc32\bin;%SystemRoot%\system32
+        set LIB=c:\bcc32\lib
+        set HB_BUILD_MODE=c
+        set HB_USER_CFLAGS=-w-sig -w-8071 -w-8084 -w-8065
+        set HB_USER_LDFLAGS=-L"c:\bcc32\lib" -L"c:\bcc32\lib\psdk"
+        set HB_USER_PRGFLAGS=-l-
+        set HB_USER_RESFLAGS=-Ic:\\bcc32\\include\\windows\\sdk\\
+        set HB_BUILD_CONTRIBS=no
+        set HB_BUILD_DYN=no
+        set HB_COMPILER=bcc
+        win-make.exe || exit /b 1
+        if not exist bin\win\bcc\hbmk2.exe ( echo host hbmk2.exe missing & exit /b 1 )
+        bin\win\bcc\hbmk2.exe --version
 
     - name: Compile and install Harbour
       shell: cmd
@@ -46,7 +79,9 @@ jobs:
         set HB_USER_CFLAGS=
         set HB_USER_LDFLAGS=-L"c:\bcc77\lib" -L"c:\bcc77\lib\psdk"
         set HB_USER_PRGFLAGS=-l-
-        set HB_BUILD_CONTRIBS=
+        rem Contribs FWH links (samples\build_new.bat); their 3rd-party deps come along
+        set HB_BUILD_CONTRIBS=hbhpdf hbwin hbct xhb hbziparc hbmzip hbtip hbzebra hbcurl
+        set HB_HOST_BIN=%GITHUB_WORKSPACE%\harbour\bin\win\bcc
         set HB_WITH_OPENSSL=C:\OpenSSL\include
         set HB_WITH_CURL=C:\curl\include
         set HB_STATIC_OPENSSL=yes
@@ -55,8 +90,10 @@ jobs:
         SET HB_BUILD_CONTRIB_DYN=no
         SET HB_BUILD_DYN=no
         set HB_INSTALL_PREFIX=%GITHUB_WORKSPACE%\output
-        win-make.exe src || exit /b 1
-        win-make.exe -C src install || exit /b 1
+        win-make.exe || exit /b 1
+        win-make.exe install || exit /b 1
+        for %%l in (hbvm hbhpdf libhpdf png hbwin hbct xhb hbziparc hbmzip minizip hbtip hbzebra hbcurl) do if not exist "%HB_INSTALL_PREFIX%\lib\win\bcc64\%%l.a" ( echo Missing %%l.a & exit /b 1 )
+        if not exist "%HB_INSTALL_PREFIX%\include\hbapi.h" ( echo Missing include & exit /b 1 )
 
     - name: Get current time
       id: current-time
@@ -72,3 +109,31 @@ jobs:
       with:
        name: harbour_win64_bcc_${{ env.TIME }}
        path: output
+
+  replace-release-asset:
+    needs: build
+    if: inputs.release_tag != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: art
+      - name: Replace harbour_win64_bcc_* asset
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.release_tag }}
+        run: |
+          set -e
+          art_dir=$(ls -d art/harbour_win64_bcc_*/ | head -1)
+          name=$(basename "$art_dir")
+          short=${TAG#core-}
+          zip_name="${name}_core-${short}.zip"
+          (cd "$art_dir" && zip -qr "$GITHUB_WORKSPACE/$zip_name" .)
+          unzip -l "$zip_name" | tail -1
+          for old in $(gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json assets -q '.assets[].name' | grep '^harbour_win64_bcc_' || true); do
+            [ "$old" = "$zip_name" ] || gh release delete-asset "$TAG" "$old" -R "$GITHUB_REPOSITORY" -y
+          done
+          gh release upload "$TAG" "$zip_name" -R "$GITHUB_REPOSITORY" --clobber
+          gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json assets -q '.assets[].name' | grep '^harbour_win64_bcc_'
