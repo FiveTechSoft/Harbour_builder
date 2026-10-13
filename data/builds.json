@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-13T17:25:06Z",
+  "generated_at": "2026-10-13T22:10:33Z",
   "upstream_sha": "11bf837c69060bf54975b5dd01dc94b09a07de72",
-  "last_built_sha": "6ce565ad044085dd2c6bf62dcb14f13aa1aed021",
-  "just_dispatched": true,
+  "last_built_sha": "11bf837c69060bf54975b5dd01dc94b09a07de72",
+  "just_dispatched": false,
   "repo_stars": 44,
   "total_downloads": 244,
   "releases_count": 3,
@@ -12,10 +12,10 @@
       "run": {
         "id": 38438373961,
         "run_number": 164,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438373961",
-        "updated_at": "2026-10-13T17:24:23Z",
+        "updated_at": "2026-10-13T17:27:05Z",
         "created_at": "2026-10-13T17:24:19Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -26,10 +26,10 @@
       "run": {
         "id": 38438377653,
         "run_number": 230,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438377653",
-        "updated_at": "2026-10-13T17:24:24Z",
+        "updated_at": "2026-10-13T17:29:34Z",
         "created_at": "2026-10-13T17:24:20Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -40,10 +40,10 @@
       "run": {
         "id": 38438381541,
         "run_number": 5,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438381541",
-        "updated_at": "2026-10-13T17:24:26Z",
+        "updated_at": "2026-10-13T17:43:19Z",
         "created_at": "2026-10-13T17:24:22Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -54,10 +54,10 @@
       "run": {
         "id": 38438385327,
         "run_number": 4,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438385327",
-        "updated_at": "2026-10-13T17:24:28Z",
+        "updated_at": "2026-10-13T17:41:59Z",
         "created_at": "2026-10-13T17:24:24Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -68,10 +68,10 @@
       "run": {
         "id": 38438388761,
         "run_number": 3,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438388761",
-        "updated_at": "2026-10-13T17:24:30Z",
+        "updated_at": "2026-10-13T17:40:48Z",
         "created_at": "2026-10-13T17:24:25Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -82,10 +82,10 @@
       "run": {
         "id": 38438392395,
         "run_number": 3,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438392395",
-        "updated_at": "2026-10-13T17:24:34Z",
+        "updated_at": "2026-10-13T17:42:34Z",
         "created_at": "2026-10-13T17:24:27Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -96,10 +96,10 @@
       "run": {
         "id": 38438397061,
         "run_number": 231,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438397061",
-        "updated_at": "2026-10-13T17:24:38Z",
+        "updated_at": "2026-10-13T17:27:24Z",
         "created_at": "2026-10-13T17:24:29Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -110,10 +110,10 @@
       "run": {
         "id": 38438400880,
         "run_number": 10,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438400880",
-        "updated_at": "2026-10-13T17:24:37Z",
+        "updated_at": "2026-10-13T17:33:53Z",
         "created_at": "2026-10-13T17:24:31Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -124,10 +124,10 @@
       "run": {
         "id": 38438405069,
         "run_number": 118,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438405069",
-        "updated_at": "2026-10-13T17:24:37Z",
+        "updated_at": "2026-10-13T17:33:07Z",
         "created_at": "2026-10-13T17:24:33Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -138,10 +138,10 @@
       "run": {
         "id": 38438408625,
         "run_number": 190,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438408625",
-        "updated_at": "2026-10-13T17:24:39Z",
+        "updated_at": "2026-10-13T17:35:35Z",
         "created_at": "2026-10-13T17:24:35Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -152,10 +152,10 @@
       "run": {
         "id": 38438412337,
         "run_number": 142,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438412337",
-        "updated_at": "2026-10-13T17:24:41Z",
+        "updated_at": "2026-10-13T17:33:00Z",
         "created_at": "2026-10-13T17:24:36Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -166,10 +166,10 @@
       "run": {
         "id": 38438416359,
         "run_number": 156,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438416359",
-        "updated_at": "2026-10-13T17:24:43Z",
+        "updated_at": "2026-10-13T17:33:09Z",
         "created_at": "2026-10-13T17:24:38Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -180,10 +180,10 @@
       "run": {
         "id": 38438420611,
         "run_number": 4,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438420611",
-        "updated_at": "2026-10-13T17:24:44Z",
+        "updated_at": "2026-10-13T17:26:36Z",
         "created_at": "2026-10-13T17:24:40Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -194,10 +194,10 @@
       "run": {
         "id": 38438424744,
         "run_number": 216,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438424744",
-        "updated_at": "2026-10-13T17:24:46Z",
+        "updated_at": "2026-10-13T17:30:06Z",
         "created_at": "2026-10-13T17:24:42Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -208,10 +208,10 @@
       "run": {
         "id": 38438428777,
         "run_number": 8,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438428777",
-        "updated_at": "2026-10-13T17:24:50Z",
+        "updated_at": "2026-10-13T17:30:13Z",
         "created_at": "2026-10-13T17:24:44Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -222,10 +222,10 @@
       "run": {
         "id": 38438432879,
         "run_number": 124,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438432879",
-        "updated_at": "2026-10-13T17:24:50Z",
+        "updated_at": "2026-10-13T17:36:05Z",
         "created_at": "2026-10-13T17:24:46Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -236,10 +236,10 @@
       "run": {
         "id": 38438437008,
         "run_number": 164,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438437008",
-        "updated_at": "2026-10-13T17:24:51Z",
+        "updated_at": "2026-10-13T17:36:42Z",
         "created_at": "2026-10-13T17:24:47Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -250,10 +250,10 @@
       "run": {
         "id": 38438441053,
         "run_number": 8,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438441053",
-        "updated_at": "2026-10-13T17:24:54Z",
+        "updated_at": "2026-10-13T17:31:20Z",
         "created_at": "2026-10-13T17:24:49Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -264,10 +264,10 @@
       "run": {
         "id": 38438445127,
         "run_number": 9,
-        "status": "queued",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438445127",
-        "updated_at": "2026-10-13T17:24:51Z",
+        "updated_at": "2026-10-13T17:33:08Z",
         "created_at": "2026-10-13T17:24:51Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -278,10 +278,10 @@
       "run": {
         "id": 38438448910,
         "run_number": 9,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438448910",
-        "updated_at": "2026-10-13T17:25:03Z",
+        "updated_at": "2026-10-13T17:28:27Z",
         "created_at": "2026-10-13T17:24:53Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
@@ -292,10 +292,10 @@
       "run": {
         "id": 38438453256,
         "run_number": 8,
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "success",
         "html_url": "https://github.com/FiveTechSoft/Harbour_builder/actions/runs/38438453256",
-        "updated_at": "2026-10-13T17:24:59Z",
+        "updated_at": "2026-10-13T17:30:54Z",
         "created_at": "2026-10-13T17:24:55Z",
         "head_sha": "910f9816eadf255dc170e6e30793efe16cfc2e45",
         "run_attempt": 1
