@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-13T22:10:33Z",
+  "generated_at": "2026-10-14T01:31:33Z",
   "upstream_sha": "11bf837c69060bf54975b5dd01dc94b09a07de72",
   "last_built_sha": "11bf837c69060bf54975b5dd01dc94b09a07de72",
   "just_dispatched": false,
   "repo_stars": 44,
   "total_downloads": 244,
-  "releases_count": 3,
+  "releases_count": 4,
   "workflows": [
     {
       "file": "harbour_bcc_32.yml",
